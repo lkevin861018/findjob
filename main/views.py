@@ -14,6 +14,7 @@ import datetime
 complete = []
 complete_key = ''.join(random.choice(string.ascii_letters + string.digits)
                        for _ in range(10))
+complete_key2 = ''
 reset_complete = []
 reset_complete_key = ''.join(random.choice(string.ascii_letters + string.digits)
                              for _ in range(12))
@@ -21,8 +22,9 @@ reset_complete_key = ''.join(random.choice(string.ascii_letters + string.digits)
 
 def confirm(request):
     # global complete_key
+    global complete_key2
     try:
-        if request.GET.get('k') == complete_key:
+        if request.GET.get('k') == complete_key2:
             dreamreal = Dreamreal(
                 lastname=complete[0],
                 firstname=complete[1],
@@ -38,7 +40,7 @@ def confirm(request):
         else:
             messages.add_message(
                 request, messages.INFO, '驗證錯誤，請重新註冊!')
-            return render(request, 'signIn.html')
+            return redirect('signIn')
     except:
         messages.add_message(
             request, messages.INFO, '帳號已驗證過!')
@@ -98,6 +100,8 @@ def signIn(request):
             else:
                 # sendSimpleEmail(request, email)
                 global complete_key
+                global complete_key2
+                complete_key2 = complete_key
                 lastname = str(lastname)
                 firstname = str(firstname)
                 pid = str(pid)
