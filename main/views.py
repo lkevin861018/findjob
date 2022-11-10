@@ -103,9 +103,10 @@ def signIn(request):
                 pid = str(pid)
                 email = str(email)
                 passwd = str(passwd)
-                send_mail("confirm mail", "進入此連結驗證:http://127.0.0.1:8000/main/confirm?k=%s" % complete_key,
+                # send_mail("confirm mail", "進入此連結驗證:http://127.0.0.1:8000/main/confirm?k=%s" % complete_key,
+                #           "kevinliang1018@gmail.com", [email])
+                send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/confirm?k=%s" % complete_key,
                           "kevinliang1018@gmail.com", [email])
-
                 global complete
                 complete = [lastname, firstname, pid, email, passwd]
 
@@ -200,9 +201,10 @@ def reset(request):
                 return render(request, 'reset.html')
             else:
                 reset_complete = [user.email, re_pass]
-                send_mail("confirm mail", "進入此連結驗證:http://127.0.0.1:8000/main/resetconfirm?k=%s" % reset_complete_key,
+                # send_mail("confirm mail", "進入此連結驗證:http://127.0.0.1:8000/main/resetconfirm?k=%s" % reset_complete_key,
+                #           "kevinliang1018@gmail.com", [user.email])
+                send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/resetconfirm?k=%s" % reset_complete_key,
                           "kevinliang1018@gmail.com", [user.email])
-
                 return HttpResponse("請置信箱驗證!")
         except:
             messages.add_message(
