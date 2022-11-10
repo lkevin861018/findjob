@@ -18,6 +18,7 @@ complete_key2 = ''
 reset_complete = []
 reset_complete_key = ''.join(random.choice(string.ascii_letters + string.digits)
                              for _ in range(12))
+reset_complete_key2 = ''
 
 
 def confirm(request):
@@ -49,9 +50,9 @@ def confirm(request):
 
 def resetconfirm(request):
     global reset_complete
-    global reset_complete_key
+    global reset_complete_key2
     try:
-        if request.GET.get('k') == reset_complete_key:
+        if request.GET.get('k') == reset_complete_key2:
             user = Dreamreal.objects.get(email=reset_complete[0])
             user.passwd = reset_complete[1]
             user.save()
@@ -101,18 +102,18 @@ def signIn(request):
                 # sendSimpleEmail(request, email)
                 global complete_key
                 global complete_key2
+                global complete
                 complete_key2 = complete_key
                 lastname = str(lastname)
                 firstname = str(firstname)
                 pid = str(pid)
                 email = str(email)
                 passwd = str(passwd)
+                complete = [lastname, firstname, pid, email, passwd]
                 # send_mail("confirm mail", "進入此連結驗證:http://127.0.0.1:8000/main/confirm?k=%s" % complete_key,
                 #           "kevinliang1018@gmail.com", [email])
                 send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/confirm?k=%s" % complete_key,
                           "kevinliang1018@gmail.com", [email])
-                global complete
-                complete = [lastname, firstname, pid, email, passwd]
 
                 return HttpResponse('請至信箱驗證')
         else:
@@ -182,6 +183,8 @@ def reset(request):
     if request.method == 'POST':
         global reset_complete
         global reset_complete_key
+        global reset_complete_key2
+        reset_complete_key2 = reset_complete_key
         account = request.POST['account']
         re_pass = request.POST['repass']
         chech_pass = request.POST['checkpass']
