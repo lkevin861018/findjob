@@ -1,0 +1,54 @@
+{% load static %}
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+   </head>
+   <body>
+      <div class="header">
+         <div class="menu">
+            <h1>My Resume</h1>
+         </div>
+      </div>
+         {% if messages %}
+         {% for message in messages %}
+               <script>
+                alert('{{ message}}');
+            </script>
+            {% endfor %}
+         {% endif %}
+      <form action = "/main/resume_style/" method = "POST">
+         {% csrf_token %}
+         <input type = "submit" value = "變更樣式">
+      </form>
+      <link rel="stylesheet" href="/static/resumestyle/{{resumestyle}}.css">
+      <form action = "/main/resume_save/" method = "POST">
+         {% csrf_token %}
+         <input type = "hidden" name = "user_resumestyle" value = "{{resumestyle}}">
+         <div class="resume_style">
+            <div class="user_name">
+               <p>{{lastname}}{{firstname}}</p>
+            </div>
+            <div class="user_education">
+               <p>學歷</p>
+            <textarea name="user_education" rows="3" cols="30" autofocus>{{user_education}}</textarea>
+            </div>
+            <div class="user_experience">
+                <p>工作經歷</p>
+                <textarea name="user_experience" rows="5" cols="30" autofocus>{{user_experience}}</textarea>
+            </div>
+            <div class="user_skill">
+               <p>技能</p>
+               <textarea name="user_skill" rows="10" cols="30" autofocus>{{user_skill}}</textarea>
+            </div>
+            <div class="user_selfintroduction">
+               <p>自傳</p>
+               <textarea name="user_selfintroduction" rows="10" cols="30" autofocus>{{user_selfintroduction}}</textarea>
+            </div>
+         </div>
+         <input type = "submit" value = "儲存">
+      </form>
+   </body>
+</html>

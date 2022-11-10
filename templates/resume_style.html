@@ -1,0 +1,25 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+   </head>
+   <body>
+      <div class="header">
+         <div class="menu">
+            <h1>My Resume</h1>
+         </div>
+      </div>
+      <form action = "/main/resume_edit/" method = "POST">
+         {% csrf_token %}
+         {% load static %}
+         <input type="radio" name = "style" value="0" checked ><img src="/static/resumestyle/0.jpg" width="48" height="48">
+         <input type="radio" name = "style" value="1" ><img src="/static/resumestyle/1.jpg" width="48" height="48">
+         <input type="radio" name = "style" value="2" ><img src="/static/resumestyle/2.jpg" width="48" height="48">
+         <input type="radio" name = "style" value="3" ><img src="/static/resumestyle/3.jpg" width="48" height="48">
+         <input type="radio" name = "style" value="4" ><img src="/static/resumestyle/4.jpg" width="48" height="48">
+         <input type = "submit" value = "選擇">
+      </form>
+   </body>
+</html>
