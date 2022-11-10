@@ -25,15 +25,15 @@ def confirm(request):
     global complete_key2
     try:
         if request.GET.get('k') == complete_key2:
-            dreamreal = Dreamreal(
-                lastname=complete[0],
-                firstname=complete[1],
-                pid=complete[2],
-                email=complete[3],
-                passwd=complete[4]
-            )
+            # dreamreal = Dreamreal(
+            #     lastname=complete[0],
+            #     firstname=complete[1],
+            #     pid=complete[2],
+            #     email=complete[3],
+            #     passwd=complete[4]
+            # )
 
-            dreamreal.save()
+            # dreamreal.save()
             messages.add_message(
                 request, messages.INFO, '註冊成功')
             return redirect('login')
