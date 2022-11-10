@@ -45,7 +45,7 @@ def confirm(request):
     except:
         messages.add_message(
             request, messages.INFO, '帳號已驗證過!')
-        return render(request, 'signIn.html')
+        return redirect('signIn')
 
 
 def resetconfirm(request):
