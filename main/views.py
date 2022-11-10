@@ -198,9 +198,11 @@ def reset(request):
                 messages.add_message(
                     request, messages.INFO, '不可與原密碼相同!')
                 return render(request, 'reset.html')
-            elif '' in re_pass:
+            elif '' in [re_pass]:
                 messages.add_message(
                     request, messages.INFO, '密碼不可空白!')
+                # messages.add_message(
+                #     request, messages.INFO, re_pass)
                 return render(request, 'reset.html')
             elif re_pass != chech_pass:
                 messages.add_message(
