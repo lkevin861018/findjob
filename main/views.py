@@ -20,7 +20,7 @@ reset_complete_key = ''.join(random.choice(string.ascii_letters + string.digits)
 
 
 def confirm(request):
-    global complete_key
+    # global complete_key
     try:
         if request.GET.get('k') == complete_key:
             dreamreal = Dreamreal(
