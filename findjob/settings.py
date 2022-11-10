@@ -91,7 +91,7 @@ EMAIL_HOST = "smtp.gmail.com"
 
 EMAIL_HOST_USER = "kevinliang1018"
 
-EMAIL_HOST_PASSWORD = "qajajeawcpvxpwhr"
+EMAIL_HOST_PASSWORD = "fqutxbwwodtsdylq"
 
 EMAIL_PORT = "465"
 
