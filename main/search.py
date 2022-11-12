@@ -28,12 +28,12 @@ def search104(request):
         chrome_options = Options()
         chrome_options.add_argument("--headless")
     # heroku上使用
-        # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        # chrome_options.add_argument("--disable-dev-shm-usage")
-        # chrome_options.add_argument("--no-sandbox")
-        # browser = webdriver.Chrome(executable_path=os.environ.get(
-        #     "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        browser = webdriver.Chrome(options=chrome_options)
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
+        browser = webdriver.Chrome(executable_path=os.environ.get(
+            "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        # browser = webdriver.Chrome(options=chrome_options)
         browser.implicitly_wait(5)
         browser.get(url)
         urlsource = browser.page_source
@@ -108,12 +108,12 @@ def search_hahow(request):
         chrome_options = Options()
         chrome_options.add_argument("--headless")
     # heroku上使用
-        # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        # chrome_options.add_argument("--disable-dev-shm-usage")
-        # chrome_options.add_argument("--no-sandbox")
-        # browser = webdriver.Chrome(executable_path=os.environ.get(
-        #     "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        browser = webdriver.Chrome(options=chrome_options)
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
+        browser = webdriver.Chrome(executable_path=os.environ.get(
+            "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        # browser = webdriver.Chrome(options=chrome_options)
         browser.implicitly_wait(10)
         browser.get(url)
         browser.set_window_size(800, 800)
