@@ -27,8 +27,10 @@ def search104(request):
             keyword+"&indexpoc&ro=0&page="+num
         chrome_options = Options()
         chrome_options.add_argument("--headless")
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         # browser = webdriver.Chrome(options=chrome_options)
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
         browser = webdriver.Chrome(executable_path=os.environ.get(
             "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
         browser.implicitly_wait(5)
@@ -104,8 +106,10 @@ def search_hahow(request):
         url = 'https://hahow.in/courses'
         chrome_options = Options()
         chrome_options.add_argument("--headless")
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         # browser = webdriver.Chrome(options=chrome_options)
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
         browser = webdriver.Chrome(executable_path=os.environ.get(
             "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
         browser.implicitly_wait(10)
