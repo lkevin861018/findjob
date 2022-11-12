@@ -1,17 +1,33 @@
 <body>
     <form action="{% url 'search_hahow' %}" method="POST">
-        {% if messages %}
-        {% for message in messages %}
-            <script>
-                alert('{{ message}}');
-            </script>
-            {% endfor %}
-        {% endif %}
     {% csrf_token %}
     <h1>課程查詢</h1>
+    <select id="cars" name="page">
+        <option value="">頁碼</option>
+        <script language='JavaScript'>
+        for (i=1;i<=38;i++){
+            document.write('<option value='+i+'>'+i+'</option>');
+        }
+        </script>
+     </select>
     <input type="submit" value="查詢">
     </form>
      <a href="/main/index">
         <button>返回首頁</button>
     </a>
+    <div class="partimejob">
+        {% for Fclass in Fclass%}
+        <div class="class">
+           {{Fclass.0}}
+        </div>
+        <div class="classroom">
+           {{Fclass.1}}</a>
+        </div>
+        <div class="price">
+            {{Fclass.2}}</a>
+         </div>
+        <br>
+        {% endfor%}
+        <br>
+     </div>
 </body>

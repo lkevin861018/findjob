@@ -27,12 +27,13 @@ def search104(request):
             keyword+"&indexpoc&ro=0&page="+num
         chrome_options = Options()
         chrome_options.add_argument("--headless")
-        # browser = webdriver.Chrome(options=chrome_options)
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--no-sandbox")
-        browser = webdriver.Chrome(executable_path=os.environ.get(
-            "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    # heroku上使用
+        # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        # chrome_options.add_argument("--disable-dev-shm-usage")
+        # chrome_options.add_argument("--no-sandbox")
+        # browser = webdriver.Chrome(executable_path=os.environ.get(
+        #     "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        browser = webdriver.Chrome(options=chrome_options)
         browser.implicitly_wait(5)
         browser.get(url)
         urlsource = browser.page_source
@@ -82,17 +83,17 @@ def search104(request):
             ##-----07.職缺連結網址串列-----------------------------------------------##
             tempHref = 'https:'+href.get('href')
             tempHrefListData.append(tempHref)
-        df = pd.DataFrame([tempTitleListData,
-                           tempCompanyListData,
-                           tempAreaListData,
-                           tempExperienceListData,
-                           tempEducationListData,
-                           tempSalaryListData,
-                           tempHrefListData]).T
-        df.index += 1
-        df.columns = ['職缺', '公司名稱', '縣市', '經歷需求', '學歷需求', '待遇', '網址']
-        df_html = df.to_html()
-        return HttpResponse(df_html)
+        df = []
+        for i in range(len(tempTitleListData)):
+            df.append([tempTitleListData[i],
+                       tempCompanyListData[i],
+                       tempAreaListData[i],
+                       tempExperienceListData[i],
+                       tempEducationListData[i],
+                       tempSalaryListData[i],
+                       tempHrefListData[i]])
+
+        return render(request, 'search104.html', context={'FTjob': df})
     else:
         return render(request, 'search104.html')
 
@@ -102,16 +103,17 @@ def search_hahow(request):
         titleListdata = []
         nameListdata = []
         priceListdata = []
-
-        url = 'https://hahow.in/courses'
+        page = request.POST['page']
+        url = 'https://hahow.in/courses?page=%s' % page
         chrome_options = Options()
         chrome_options.add_argument("--headless")
-        # browser = webdriver.Chrome(options=chrome_options)
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--no-sandbox")
-        browser = webdriver.Chrome(executable_path=os.environ.get(
-            "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    # heroku上使用
+        # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        # chrome_options.add_argument("--disable-dev-shm-usage")
+        # chrome_options.add_argument("--no-sandbox")
+        # browser = webdriver.Chrome(executable_path=os.environ.get(
+        #     "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        browser = webdriver.Chrome(options=chrome_options)
         browser.implicitly_wait(10)
         browser.get(url)
         browser.set_window_size(800, 800)
@@ -131,12 +133,11 @@ def search_hahow(request):
             titleListdata.append(temptitle)
             nameListdata.append(tempName)
             priceListdata.append(tempprice)
-        df = pd.DataFrame([titleListdata,
-                           nameListdata,
-                           priceListdata]).T
-        df.index += 1
-        df.columns = ['學程', '開課單位', '價格']
-        df_html = df.to_html()
-        return HttpResponse(df_html)
+        df = []
+        for i in range(len(titleListdata)):
+            df.append([titleListdata[i],
+                       nameListdata[i],
+                       priceListdata[i]])
+        return render(request, 'search_hahow.html', context={'Fclass': df})
     else:
         return render(request, 'search_hahow.html')

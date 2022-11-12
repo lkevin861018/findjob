@@ -1,12 +1,5 @@
 <body>
     <form action="{% url 'search104' %}" method="POST">
-        {% if messages %}
-        {% for message in messages %}
-            <script>
-                alert('{{ message}}');
-            </script>
-            {% endfor %}
-        {% endif %}
     {% csrf_token %}
     <h1>工作查詢</h1>
     <span>請輸入關鍵字：</span><input type="text" name="keyword" id="">
@@ -18,4 +11,32 @@
      <a href="/main/index">
         <button>返回首頁</button>
     </a>
+    <div class="fullimejob">
+        {% for FTjob in FTjob%}
+        <div class="Work">
+           {{FTjob.0}}
+        </div>
+        <div class="company">
+            {{FTjob.1}}
+         </div>
+         <div class="WorkArea">
+            {{FTjob.2}}
+         </div>
+        <div class="Exp">
+           {{FTjob.3}}
+        </div>
+        <div class="Edu">
+           {{FTjob.4}}
+        </div>
+        <div class="saraly">
+           {{FTjob.5}}
+        </div>
+        <div class="title">
+            <div class="href">
+               <a href="{{FTjob.6}}">{{FTjob.6}}</a>
+            </div>
+         </div>
+        <br>
+        {% endfor%}
+     </div>
 </body>
