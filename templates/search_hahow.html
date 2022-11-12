@@ -2,6 +2,8 @@
     <form action="{% url 'search_hahow' %}" method="POST">
     {% csrf_token %}
     <h1>課程查詢</h1>
+    <span>請輸入關鍵字：</span><input type="text" name="keyword" id="">
+    <br>
     <select id="cars" name="page">
         <option value="">頁碼</option>
         <script language='JavaScript'>
