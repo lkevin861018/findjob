@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'main',
-    'bootstrap4'
+
 ]
 
 ROOT_URLCONF = "findjob.urls"
@@ -184,13 +184,13 @@ STATICFILES_FINDERS = (
 DAJAXICE_MEDIA_PREFIX = 'dajaxice'
 
 MEDIA_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATIC_ROOT = os.path.join(os.path.dirname(
 #     os.path.abspath(__file__)), 'static')
 STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'findjob/static'),
-
 ]
+
 STATIC_URL = '/static/'
 django_heroku.settings(locals())

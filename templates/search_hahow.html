@@ -1,0 +1,17 @@
+<body>
+    <form action="{% url 'search_hahow' %}" method="POST">
+        {% if messages %}
+        {% for message in messages %}
+            <script>
+                alert('{{ message}}');
+            </script>
+            {% endfor %}
+        {% endif %}
+    {% csrf_token %}
+    <h1>課程查詢</h1>
+    <input type="submit" value="查詢">
+    </form>
+     <a href="/main/index">
+        <button>返回首頁</button>
+    </a>
+</body>
