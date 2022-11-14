@@ -13,7 +13,8 @@ class Dreamreal(models.Model):
 
     class Meta:
         db_table = 'dreamreal'
-        
+
+
 class user_resume(models.Model):
     pid = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
@@ -27,3 +28,12 @@ class user_resume(models.Model):
     class Meta:
         db_table = 'user_resume'
 
+
+class companyacc(models.Model):
+    companyname = models.CharField(max_length=50)
+    pid = models.CharField(max_length=50, unique=True)
+    email = models.CharField(max_length=50, unique=True)
+    passwd = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'campanyacc'

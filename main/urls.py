@@ -38,6 +38,13 @@ urlpatterns = [
     re_path(r'^parttime/', viewjobs.parttime, name='parttime'),
     re_path(r'^fulltime/', viewjobs.fulltime, name='fulltime'),
     re_path(r'^joblist/', views.joblist, name='joblist'),
+
+    re_path(r'^company_signIn/', views.company_signIn, name='company_signIn'),
+    re_path(r'^company_login/', views.company_login, name='company_login'),
+    re_path(r'^company_confirm/', views.company_confirm, name='company_confirm'),
+    re_path(r'^company_resetconfirm/',
+            views.company_resetconfirm, name='company_resetconfirm'),
+    re_path(r'^company_reset/', views.company_reset, name='company_reset'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

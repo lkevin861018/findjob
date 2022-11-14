@@ -9,35 +9,34 @@
 </head>
 <body>
     {% comment %} <form action = "/main/login/" method = "POST"> {% endcomment %}
-    <form action="{% url 'login' %}" method="POST">
+    <form action="{% url 'company_login' %}" method="POST">
 
         {% if messages %}
         {% for message in messages %}
             <script>
                 alert('{{ message}}');
-
             </script>
             {% endfor %}
         {% endif %}
     {% csrf_token %}
-    <h1>求職者者登入</h1>
-    <span>請輸入身分證或電子郵件：</span><input type="text" name="account" id="">
+    <h1>企業登入</h1>
+    <span>請輸入公司編號或電子郵件：</span><input type="text" name="account" id="">
     <br>
     <span>請輸入密碼：</span><input type="password" name="passwd" id="">
     <br>
     <input type="submit" value="提交"></form>
-    <a href="/main/signIn">
+    <a href="/main/company_signIn">
         <button>註冊</button>
     </a>
     <a href="/main/index">
         <h6>返回首頁</h6>
     </a>
     </a>
-    <a href="/main/company_login">
-        <h6>切換企業登入</h6>
+    <a href="/main/login">
+        <h6>切換求職者登入</h6>
     </a>
     <h6>登入問題回報</h6>
-    <a href="/main/reset">
+    <a href="/main/company_reset">
     <h6>忘記帳號或密碼</h6>
     </a>
     <h6>或使用其他帳戶登入</h6>

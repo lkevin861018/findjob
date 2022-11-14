@@ -7,35 +7,31 @@
     <title>Document</title>
 </head>
 <body>
-    <form action = "/main/signIn/" method = "POST">
+    <form action = "/main/company_signIn/" method = "POST">
         {% if messages %}
         {% for message in messages %}
             <script>
                 alert('{{ message}}');
-
             </script>
             {% endfor %}
         {% endif %}
 
-
-
         {% csrf_token %}
-        <h1>求職者基本資料註冊</h1>
+        <h1>企業基本資料註冊</h1>
         <h6>請輸入你的個人資料</h6>
-        <span>請輸入姓氏</span><input type="text" name="last_name" id="">
-        <span>請輸入名字</span><input type="text" name="first_name" id="">
-        <span>請輸入身分證或他國護照號碼</span><input type="text" name="pid" id="">
+        <span>請輸入公司名稱</span><input type="text" name="companyname" id="">
+        <span>請輸入公司編號</span><input type="text" name="pid" id="">
         <br>
         <span>請輸入電子郵件</span><input type="text" name="email" id="">
         <span>請輸入密碼</span><input type="text" name="passwd" id="">
         <br>
-        <input type="submit" value="註冊" name='postsignIn'></form>
-        <a href="/main/login">
+        <input type="submit" value="註冊" name='company_postsignIn'></form>
+        <a href="/main/company_login">
             <h6>返回登入</h6>
             </a>
         </a>
-        <a href="/main/company_signIn">
-            <h6>切換企業註冊</h6>
+        <a href="/main/signIn">
+            <h6>切換求職者註冊</h6>
         </a>
         <h6>使用其他帳戶註冊</h6>
         <input type="button" value="Sign Up With Apple">
