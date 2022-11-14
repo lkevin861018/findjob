@@ -106,13 +106,14 @@ def search_hahow(request):
         priceListdata = []
         page = request.POST['page']
         keyword = request.POST['keyword']
-        if '' in [keyword]:
-            url = 'https://hahow.in/courses?page=%s' % page
-            way = 1
-        else:
-            url = 'https://hahow.in/search/courses?query=%s&page=%s' % (
-                keyword, page)
-            way = 2
+        url = 'https://hahow.in/courses?page=%s' % page
+        # if '' in [keyword]:
+        #     url = 'https://hahow.in/courses?page=%s' % page
+        #     way = 1
+        # else:
+        #     url = 'https://hahow.in/search/courses?query=%s&page=%s' % (
+        #         keyword, page)
+        #     way = 2
         chrome_options = Options()
         chrome_options.add_argument("--headless")
     # heroku上使用
@@ -129,14 +130,17 @@ def search_hahow(request):
         # browser.set_page_load_timeout(5)
 
         soup = BeautifulSoup(urlsource, 'html.parser')
-        if way == 1:
-            titleList = soup.select('div.list-container a h4.txt-bold')
-            nameList = soup.select('div.list-container div.course-meta p')
-            priceList = soup.select('div.list-container div.course-status-bar')
-        elif way == 2:
-            titleList = soup.select('div.list-container a h4.txt-bold')
-            nameList = soup.select('div.list-container div.course-meta p')
-            priceList = soup.select('div.list-container div.course-status-bar')
+        titleList = soup.select('div.list-container a h4.txt-bold')
+        nameList = soup.select('div.list-container div.course-meta p')
+        priceList = soup.select('div.list-container div.course-status-bar')
+        # if way == 1:
+        #     titleList = soup.select('div.list-container a h4.txt-bold')
+        #     nameList = soup.select('div.list-container div.course-meta p')
+        #     priceList = soup.select('div.list-container div.course-status-bar')
+        # elif way == 2:
+        #     titleList = soup.select('div.list-container a h4.txt-bold')
+        #     nameList = soup.select('div.list-container div.course-meta p')
+        #     priceList = soup.select('div.list-container div.course-status-bar')
 
         for title, name, price in zip(titleList, nameList, priceList):
             temptitle = title.text

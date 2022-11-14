@@ -134,7 +134,7 @@ def login(request):
             except:
                 user = Dreamreal.objects.get(email=account)
             if passwd == user.passwd:
-                return render(request, 'main.html')
+                return redirect('index')
             else:
                 del request.session['account']
                 del request.session['passwd']
@@ -156,7 +156,8 @@ def login(request):
 
             if user.passwd == passwd:
                 request.session['passwd'] = user.passwd
-                return render(request, 'main.html')
+                name = str(user.firstname)+str(user.lastname)
+                return redirect('index')
             else:
                 messages.add_message(
                     request, messages.INFO, '帳號或密碼錯誤!')
@@ -223,3 +224,7 @@ def reset(request):
 
 def index(request):
     return render(request, 'index.html')
+
+
+def joblist(request):
+    return render(request, 'searchjob.html')

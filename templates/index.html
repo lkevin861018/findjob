@@ -11,16 +11,26 @@
 
 </head>
 <body>
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                alert('{{ message}}');
+
+            </script>
+            {% endfor %}
+        {% endif %}
    <div class="header">
         <div class="logo">
-            <a href="#"><h1 class="title">人才培訓進修網</h1></a>
+            <a href="/main/index"><h1 class="title">人才培訓進修網</h1></a>
         </div>
         <div class="menu">
             <ul class="submenu">
-                <li><a href="/main/index">首頁</a></li>
+                <li><a href="">首頁</a></li>
                 <li><a href="#">最新公告</a></li>
                 <li><a href="#">企業專區</a></li>
+                <li><a href="/main/resume_style/">填寫履歷</a></li>
                 <li><a href="/main/login">登入</a></li>
+                <li><a href="/main/logout">登出</a></li>
             </ul>
         </div>
    </div>
@@ -28,12 +38,12 @@
         <div class="mainbox01">
             <div class="menu">
                 <div class="itme-dropdown01">
-                    <li><a href="#">職缺搜尋</a></li>
+                    <li><a href="/main/joblist">職缺搜尋</a></li>
                     <div class="dropdown-content01">
-                        <li><a href="#">我要打工</a></li>
-                        <li><a href="#">正職職缺</a></li>
+                        <li><a href="/main/parttime">我要打工</a></li>
+                        <li><a href="/main/fulltime">正職職缺</a></li>
                         <li><a href="#">轉職專區</a></li>
-                        <li><a href="#">104人力銀行推薦</a></li>
+                        <li><a href="/main/search104">104人力銀行推薦</a></li>
                     </div>
                 </div>
                 <div class="itme-dropdown01">
@@ -55,7 +65,7 @@
                     </div>
                 </div>
                 <div class="itme-dropdown01">
-                    <li><a href="#">課程選單</a></li>
+                    <li><a href="/main/search_hahow">課程選單</a></li>
                 </div>
                 <div class="itme-dropdown01">
                     <li><a href="#">政府考試</a></li>

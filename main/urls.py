@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path, include, re_path
-from main import views, view2, search
+from main import views, view2, search, viewjobs
 from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
@@ -35,6 +35,9 @@ urlpatterns = [
     re_path(r'^resume_save/', view2.resume_save, name='resume_save'),
     re_path(r'^search104/', search.search104, name='search104'),
     re_path(r'^search_hahow/', search.search_hahow, name='search_hahow'),
+    re_path(r'^parttime/', viewjobs.parttime, name='parttime'),
+    re_path(r'^fulltime/', viewjobs.fulltime, name='fulltime'),
+    re_path(r'^joblist/', views.joblist, name='joblist'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

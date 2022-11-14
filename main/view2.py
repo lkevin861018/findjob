@@ -9,6 +9,7 @@ import string
 import random
 import datetime
 
+
 def resume_style(request):
     if request.method == 'POST':
         return render(request, 'resume_style.html')
@@ -19,9 +20,14 @@ def resume_style(request):
 def resume_edit(request):
     account = request.session['account']
     try:
-        user = Dreamreal.objects.get(pid=account)
+        try:
+            user = Dreamreal.objects.get(pid=account)
+        except:
+            user = Dreamreal.objects.get(email=account)
     except:
-        user = Dreamreal.objects.get(email=account)
+        messages.add_message(
+            request, messages.INFO, '請進行登入!')
+        return redirect('index')
     pid = user.pid
     lastname = user.lastname
     firstname = user.firstname
