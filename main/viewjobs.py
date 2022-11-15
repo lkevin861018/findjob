@@ -1,13 +1,4 @@
-from urllib import response
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from django.contrib import messages
-from main.models import Dreamreal, user_resume
-from django.core.mail import send_mail
-import re
-import string
-import random
-import datetime
+from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
 

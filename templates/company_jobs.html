@@ -1,0 +1,72 @@
+{% load static %}
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+   </head>
+   <body>
+      <div class="header">
+         <div class="menu">
+            <h1>Comanyjobs</h1>
+         </div>
+      </div>
+         {% if messages %}
+         {% for message in messages %}
+               <script>
+                alert('{{ message}}');
+            </script>
+            {% endfor %}
+         {% endif %}
+      <form action = "/main/comanyjobs_edit/" method = "POST">
+         {% csrf_token %}
+         <input type="radio" name = "number" value="1" checked >職缺一
+         <input type="radio" name = "number" value="2" >職缺二
+         <input type="radio" name = "number" value="3" >職缺三
+         <input type="radio" name = "number" value="4" >職缺四
+         <input type="radio" name = "number" value="5" >職缺五
+         <input type="submit" value = "職缺編輯">
+      </form>
+      
+      <form action = "/main/comanyjobs_save/" method = "POST">
+         {% csrf_token %}
+         <div class="comanyjobs">
+            <input type = "hidden" name = "number" value = "{{jobs_info.0}}">
+            <div class="comanyjobs_name">
+               <p>{{jobs_info.1}}</p>
+            </div>
+            <div class="comanyjobs_title">
+               <p>{{jobslist}}：</p>
+            <textarea name="title" rows="3" cols="30" autofocus>{{jobs_info.2}}</textarea>
+            </div>
+            <div class="comanyjobs_date">
+                <p>更新日期：{{jobs_info.3}}</p>
+            </div>
+            <div class="comanyjobs_content">
+               <p>工作內容：</p>
+               <textarea name="content" rows="10" cols="30" autofocus>{{jobs_info.4}}</textarea>
+            </div>
+            <div class="comanyjobs_require">
+               <p>職缺需求：</p>
+               <textarea name="require" rows="10" cols="30" autofocus>{{jobs_info.5}}</textarea>
+            </div>
+            <div class="comanyjobs_require">
+               <p>薪資待遇：</p>
+               <textarea name="salary" rows="10" cols="30" autofocus>{{jobs_info.6}}</textarea>
+            </div>
+            <div class="comanyjobs_benefits">
+               <p>工作福利：</p>
+               <textarea name="benefits" rows="10" cols="30" autofocus>{{jobs_info.7}}</textarea>
+            </div>
+            <div class="comanyjobs_email">
+               <p>聯絡方式：{{jobs_info.8}}</p>
+            </div>
+         </div>
+         <input type = "submit" value = "更新職缺">
+      </form>
+      <a href="/main/index">
+         <button>返回首頁</button>
+     </a>
+   </body>
+</html>

@@ -44,7 +44,10 @@ urlpatterns = [
     re_path(r'^company_confirm/', views.company_confirm, name='company_confirm'),
     re_path(r'^company_resetconfirm/',
             views.company_resetconfirm, name='company_resetconfirm'),
-    re_path(r'^company_reset/', views.company_reset, name='company_reset'),
+    re_path(r'^comanyjobs_edit/', views.comanyjobs_edit, name='comanyjobs_edit'),
+    re_path(r'^comanyjobs_save/', views.comanyjobs_save, name='comanyjobs_save'),
+    re_path(r'^partnerjobs/', views.partnerjobs, name='partnerjobs'),
+    
 ]
 
 urlpatterns += staticfiles_urlpatterns()

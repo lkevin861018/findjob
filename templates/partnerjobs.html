@@ -1,0 +1,52 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="header">
+            <div class="menu">
+                <h1>Partnerjobs</h1>
+            </div>
+        </div>
+        <div class="partnerjobs">
+            {% for jobs_info in jobs_info%}
+            <div class="WorkArea"> 
+               {{jobs_info.9}}
+            </div>  
+            <div class="company"> 
+               {{jobs_info.1}}
+            </div>
+            <div class="time"> 
+               {{jobs_info.3}}
+            </div>
+            <div class="title"> 
+                {{jobs_info.2}}
+            </div>
+            <div class="content"> 
+                {{jobs_info.4}}
+            </div>
+            <div class="require"> 
+                {{jobs_info.5}}
+            </div>
+            <div class="saraly"> 
+               {{jobs_info.6}}
+            </div>
+            <div class="benefits"> 
+                {{jobs_info.7}}
+            </div>
+            <div class="email"> 
+                {{jobs_info.8}}
+            </div>
+            <input type="button" value="應徵"><br>
+            <br>
+            {% endfor%}
+        </div>
+        <a href="/main/index">
+            <button>返回首頁</button>
+        </a>
+    </body>
+</html>
