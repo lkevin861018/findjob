@@ -3,12 +3,13 @@ from urllib import response
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from main.models import Dreamreal, companyacc,companyacc_jobs
+from main.models import Dreamreal, companyacc, companyacc_jobs
 from django.core.mail import send_mail
 import re
 import string
 import random
 import datetime
+import time
 # Create your views here.
 
 complete = []
@@ -436,8 +437,9 @@ def company_resetconfirm(request):
         messages.add_message(
             request, messages.INFO, '非預期錯誤!')
         return render(request, 'company_reset.html')
-    
-def comanyjobs_edit(request):
+
+
+def companyjobs_edit(request):
     try:
         account = request.session['account']
         try:
@@ -446,13 +448,15 @@ def comanyjobs_edit(request):
             company = companyacc.objects.get(email=account)
         pid = company.pid
         email = company.email
-        jobslist={pid+"_1":"職缺一",pid+"_2":"職缺二",pid+"_3":"職缺三",pid+"_4":"職缺四",pid+"_5":"職缺五"}
-        jobs_info = ["",company.companyname,"","","","","","",email,""]  
+        jobslist = {pid+"_1": "職缺一", pid+"_2": "職缺二", pid +
+                    "_3": "職缺三", pid+"_4": "職缺四", pid+"_5": "職缺五"}
+        jobs_info = ["", company.companyname,
+                     "", "", "", "", "", "", email, ""]
     except:
         messages.add_message(request, messages.INFO, '請進行登入!')
         return redirect('index')
     if request.method == 'POST':
-        jobs_number = pid + "_" + request.POST['number']  
+        jobs_number = pid + "_" + request.POST['number']
         try:
             jobs = companyacc_jobs.objects.get(number=jobs_number)
             jobs_exist = 1
@@ -469,7 +473,7 @@ def comanyjobs_edit(request):
             jobs_info[9] = jobs.address
         else:
             jobs_info[0] = jobs_number
-        return render(request, "company_jobs.html", {"jobs_info": jobs_info,"jobslist":jobslist[jobs_number]})
+        return render(request, "company_jobs.html", {"jobs_info": jobs_info, "jobslist": jobslist[jobs_number]})
     else:
         jobs_number = pid+"_1"
         try:
@@ -483,29 +487,33 @@ def comanyjobs_edit(request):
             jobs_info[7] = jobs.benefits
             jobs_info[9] = jobs.address
         except:
-            pass            
-        return render(request, "company_jobs.html", {"jobs_info": jobs_info,"jobslist":jobslist[jobs_number]})
+            pass
+        return render(request, "company_jobs.html", {"jobs_info": jobs_info, "jobslist": jobslist[jobs_number]})
 
-def comanyjobs_save(request):
+
+def companyjobs_save(request):
     if request.method == 'POST':
         account = request.session['account']
         try:
             company = companyacc.objects.get(pid=account)
         except:
             company = companyacc.objects.get(email=account)
-        jobs_number = request.POST['number']
         pid = company.pid
-        jobslist={pid+"_1":"職缺一",pid+"_2":"職缺二",pid+"_3":"職缺三",pid+"_4":"職缺四",pid+"_5":"職缺五"}  
+        jobs_number = request.POST['number']
+        if '' in [jobs_number]:
+            jobs_number = pid+"_1"
+        jobslist = {pid+"_1": "職缺一", pid+"_2": "職缺二", pid +
+                    "_3": "職缺三", pid+"_4": "職缺四", pid+"_5": "職缺五"}
         try:
             companyacc_jobs.objects.get(number=jobs_number)
             account_exist = 1
         except:
-            account_exist = 0           
+            account_exist = 0
         if account_exist == 0:
             jobs = companyacc_jobs()
         else:
             jobs = companyacc_jobs.objects.get(number=jobs_number)
-        jobs.number = jobs_number        
+        jobs.number = jobs_number
         time = datetime.datetime.now().date()
         jobs.companyname = company.companyname
         jobs.title = request.POST['title']
@@ -517,21 +525,24 @@ def comanyjobs_save(request):
         jobs.email = company.email
         jobs.address = request.POST['address']
         jobs.save()
-        jobs_info = [jobs.number,jobs.companyname,jobs.title,jobs.uploaddate,jobs.content,jobs.require,jobs.salary,jobs.benefits,jobs.email,jobs.address]
+        jobs_info = [jobs.number, jobs.companyname, jobs.title, jobs.uploaddate,
+                     jobs.content, jobs.require, jobs.salary, jobs.benefits, jobs.email, jobs.address]
         messages.add_message(
             request, messages.INFO, 'Saved at %s' % time)
-        return render(request, "company_jobs.html", {"jobs_info": jobs_info,"jobslist":jobslist[jobs_number]})
+        return render(request, "company_jobs.html", {"jobs_info": jobs_info, "jobslist": jobslist[jobs_number]})
     else:
-        return redirect("company_jobs.html")
-    
+        return redirect("companyjobs_edit")
+
+
 def partnerjobs(request):
     jobslist = companyacc_jobs.objects.all()
     jobs_info = []
     for jobs in jobslist:
-        if '' in [jobs.number,jobs.companyname,jobs.title,jobs.uploaddate,jobs.content,jobs.require,jobs.salary,jobs.benefits,jobs.email,jobs.address]:
+        if '' in [jobs.number, jobs.companyname, jobs.title, jobs.uploaddate, jobs.content, jobs.require, jobs.salary, jobs.benefits, jobs.email, jobs.address]:
             continue
         else:
-            jobs_info.append([jobs.number,jobs.companyname,jobs.title,jobs.uploaddate,jobs.content,jobs.require,jobs.salary,jobs.benefits,jobs.email,jobs.address])
+            jobs_info.append([jobs.number, jobs.companyname, jobs.title, jobs.uploaddate,
+                             jobs.content, jobs.require, jobs.salary, jobs.benefits, jobs.email, jobs.address])
     if request.method == 'POST':
         return render(request, "partnerjobs.html", {"jobs_info": jobs_info})
     else:
