@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>立即註冊-人才培訓進修網</title>
+    <link rel="stylesheet" href="{% static 'signin.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <form action = "/main/signIn/" method = "POST">
@@ -27,7 +30,7 @@
         <span>請輸入身分證或他國護照號碼</span><input type="text" name="pid" id="">
         <br>
         <span>請輸入電子郵件</span><input type="text" name="email" id="">
-        <span>請輸入密碼</span><input type="text" name="passwd" id="">
+        <span>請輸入密碼</span><input type="password" name="passwd" id="">
         <br>
         <input type="submit" value="註冊" name='postsignIn'></form>
         <a href="/main/login">

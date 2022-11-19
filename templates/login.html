@@ -1,11 +1,13 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>立即登入-人才培訓進修網</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     {% comment %} <form action = "/main/login/" method = "POST"> {% endcomment %}
@@ -20,21 +22,21 @@
             {% endfor %}
         {% endif %}
     {% csrf_token %}
-    <h1>求職者者登入</h1>
-    <span>請輸入身分證或電子郵件：</span><input type="text" name="account" id="">
+    <h1>使用者登入</h1>
+    <span>請輸入身分證、公司編號或電子郵件：</span><input type="text" name="account" id="">
     <br>
     <span>請輸入密碼：</span><input type="password" name="passwd" id="">
     <br>
     <input type="submit" value="提交"></form>
     <a href="/main/signIn">
-        <button>註冊</button>
+        <button>求職者註冊</button>
+    </a>
+    <a href="/main/company_signIn">
+        <button>企業註冊</button>
     </a>
     <a href="/main/index">
         <h6>返回首頁</h6>
     </a>
-    </a>
-    <a href="/main/company_login">
-        <h6>切換企業登入</h6>
     </a>
     <h6>登入問題回報</h6>
     <a href="/main/reset">

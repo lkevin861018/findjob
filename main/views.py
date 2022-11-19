@@ -21,6 +21,11 @@ reset_complete_key = ''.join(random.choice(string.ascii_letters + string.digits)
                              for _ in range(12))
 reset_complete_key2 = ''
 
+com_complete = []
+com_complete_key = ''.join(random.choice(string.ascii_letters + string.digits)
+                           for _ in range(10))
+com_complete_key2 = ''
+
 
 def confirm(request):
     global complete
@@ -54,7 +59,10 @@ def resetconfirm(request):
     global reset_complete_key2
     try:
         if request.GET.get('k') == reset_complete_key2:
-            user = Dreamreal.objects.get(email=reset_complete[0])
+            try:
+                user = Dreamreal.objects.get(email=reset_complete[0])
+            except:
+                user = companyacc.objects.get(email=reset_complete[0])
             user.passwd = reset_complete[1]
             user.save()
             messages.add_message(
@@ -115,6 +123,7 @@ def signIn(request):
                 #           "kevinliang1018@gmail.com", [email])
                 send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/confirm?k=%s" % complete_key2,
                           "kevinliang1018@gmail.com", [email])
+                time.sleep(3)
 
                 return HttpResponse('請至信箱驗證')
         else:
@@ -128,14 +137,21 @@ def signIn(request):
 def login(request):
     try:
         if 'status' in request.session:
-            return redirect('index')
+            status = request.session['status']
+            return render(request, 'index.html', context={'status': status})
         if 'account' in request.session:
             account = request.session['account']
             passwd = request.session['passwd']
             try:
-                user = Dreamreal.objects.get(pid=account)
+                try:
+                    user = Dreamreal.objects.get(pid=account)
+                except:
+                    user = Dreamreal.objects.get(email=account)
             except:
-                user = Dreamreal.objects.get(email=account)
+                try:
+                    user = companyacc.objects.get(pid=account)
+                except:
+                    user = companyacc.objects.get(email=account)
             if passwd == user.passwd:
                 return redirect('index')
             else:
@@ -151,15 +167,23 @@ def login(request):
 
         try:
             try:
-                user = Dreamreal.objects.get(pid=account)
-                request.session['account'] = user.pid
+                try:
+                    user = Dreamreal.objects.get(pid=account)
+                except:
+                    user = Dreamreal.objects.get(email=account)
             except:
-                user = Dreamreal.objects.get(email=account)
-                request.session['account'] = user.email
+                try:
+                    user = companyacc.objects.get(pid=account)
+                except:
+                    user = companyacc.objects.get(email=account)
 
             if user.passwd == passwd:
                 request.session['passwd'] = user.passwd
-                name = str(user.firstname)+str(user.lastname)
+                try:
+                    request.session['status'] = str(user.companyname)
+                except:
+                    request.session['status'] = str(
+                        user.firstname)+str(user.lastname)
                 return redirect('index')
             else:
                 messages.add_message(
@@ -176,9 +200,16 @@ def login(request):
 
 def logout(request):
     try:
-        del request.session['account']
-        del request.session['passwd']
-        del request.session['status']
+        try:
+            del request.session['account']
+            del request.session['passwd']
+            del request.session['status']
+        except:
+            try:
+                del request.session['passwd']
+                del request.session['status']
+            except:
+                del request.session['status']
     except:
         pass
     return redirect("index")
@@ -195,9 +226,9 @@ def reset(request):
         chech_pass = request.POST['checkpass']
         try:
             try:
-                user = Dreamreal.objects.get(pid=account)
-            except:
                 user = Dreamreal.objects.get(email=account)
+            except:
+                user = companyacc.objects.get(email=account)
         except:
             messages.add_message(
                 request, messages.INFO, '查無此帳號!')
@@ -222,6 +253,7 @@ def reset(request):
                 #           "kevinliang1018@gmail.com", [user.email])
                 send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/resetconfirm?k=%s" % reset_complete_key2,
                           "kevinliang1018@gmail.com", [user.email])
+                time.sleep(3)
                 return HttpResponse("請置信箱驗證!")
         except:
             messages.add_message(
@@ -232,7 +264,11 @@ def reset(request):
 
 
 def index(request):
-    return render(request, 'index.html')
+    try:
+        status = request.session['status']
+        return render(request, 'index.html', context={'status': status})
+    except:
+        return render(request, 'index.html')
 
 
 def joblist(request):
@@ -277,7 +313,7 @@ def company_signIn(request):
                 #           "kevinliang1018@gmail.com", [email])
                 send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/company_confirm?k=%s" % com_complete_key2,
                           "kevinliang1018@gmail.com", [email])
-
+                time.sleep(3)
                 return HttpResponse('請至信箱驗證')
         else:
             messages.add_message(
@@ -285,111 +321,6 @@ def company_signIn(request):
             return render(request, 'company_signIn.html')
     else:
         return render(request, 'company_signIn.html')
-
-
-def company_login(request):
-    try:
-        if 'account' in request.session:
-            account = request.session['account']
-            passwd = request.session['passwd']
-            try:
-                user = companyacc.objects.get(pid=account)
-            except:
-                user = companyacc.objects.get(email=account)
-            if passwd == user.passwd:
-                return redirect('index')
-            else:
-                del request.session['account']
-                del request.session['passwd']
-        else:
-            pass
-    except:
-        pass
-    if request.method == 'POST':
-        account = request.POST['account']
-        passwd = request.POST['passwd']
-
-        try:
-            try:
-                user = companyacc.objects.get(pid=account)
-                request.session['account'] = user.pid
-            except:
-                user = companyacc.objects.get(email=account)
-                request.session['account'] = user.email
-
-            if user.passwd == passwd:
-                request.session['passwd'] = user.passwd
-                request.session['status'] = 'loged'
-                name = str(user.companyname)
-                return redirect('index')
-            else:
-                messages.add_message(
-                    request, messages.INFO, '帳號或密碼錯誤!')
-                del request.session['account']
-                return render(request, 'company_login.html')
-        except:
-            messages.add_message(
-                request, messages.INFO, '帳號不存在!')
-            return render(request, 'company_login.html')
-    else:
-        return render(request, 'company_login.html')
-
-
-def company_reset(request):
-    if request.method == 'POST':
-        global com_reset_complete
-        global com_reset_complete_key
-        global com_reset_complete_key2
-        com_reset_complete_key2 = com_reset_complete_key
-        account = request.POST['account']
-        re_pass = request.POST['repass']
-        chech_pass = request.POST['checkpass']
-        try:
-            try:
-                user = companyacc.objects.get(pid=account)
-            except:
-                user = companyacc.objects.get(email=account)
-        except:
-            messages.add_message(
-                request, messages.INFO, '查無此帳號!')
-            return render(request, 'company_reset.html')
-
-        try:
-            if user.passwd == re_pass:
-                messages.add_message(
-                    request, messages.INFO, '不可與原密碼相同!')
-                return render(request, 'company_reset.html')
-            elif '' in [re_pass]:
-                messages.add_message(
-                    request, messages.INFO, '密碼不可空白!')
-                return render(request, 'company_reset.html')
-            elif re_pass != chech_pass:
-                messages.add_message(
-                    request, messages.INFO, '密碼確認錯誤，請重新確認!')
-                return render(request, 'company_reset.html')
-            else:
-                com_reset_complete = [user.email, re_pass]
-                # send_mail("confirm mail", "進入此連結驗證:http://127.0.0.1:8000/main/company_resetconfirm?k=%s" % com_reset_complete_key2,
-                #           "kevinliang1018@gmail.com", [user.email])
-                send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/company_resetconfirm?k=%s" % com_reset_complete_key2,
-                          "kevinliang1018@gmail.com", [user.email])
-                return HttpResponse("請置信箱驗證!")
-        except:
-            messages.add_message(
-                request, messages.INFO, '非預期錯誤!')
-            return render(request, 'company_reset.html')
-    else:
-        return render(request, 'company_reset.html')
-
-
-com_complete = []
-com_complete_key = ''.join(random.choice(string.ascii_letters + string.digits)
-                           for _ in range(10))
-com_complete_key2 = ''
-com_reset_complete = []
-com_reset_complete_key = ''.join(random.choice(string.ascii_letters + string.digits)
-                                 for _ in range(12))
-com_reset_complete_key2 = ''
 
 
 def company_confirm(request):
@@ -407,7 +338,7 @@ def company_confirm(request):
             company.save()
             messages.add_message(
                 request, messages.INFO, '註冊成功')
-            return redirect('company_login')
+            return redirect('login')
         else:
             messages.add_message(
                 request, messages.INFO, '驗證錯誤，請重新註冊!')
@@ -416,27 +347,6 @@ def company_confirm(request):
         messages.add_message(
             request, messages.INFO, '帳號已驗證過!')
         return redirect('company_signIn')
-
-
-def company_resetconfirm(request):
-    global com_reset_complete
-    global com_reset_complete_key2
-    try:
-        if request.GET.get('k') == com_reset_complete_key2:
-            user = companyacc.objects.get(email=com_reset_complete[0])
-            user.passwd = com_reset_complete[1]
-            user.save()
-            messages.add_message(
-                request, messages.INFO, '密碼修改成功!')
-            return redirect('company_login')
-        else:
-            messages.add_message(
-                request, messages.INFO, '驗證錯誤，請重新修改!')
-            return render(request, 'company_reset.html')
-    except:
-        messages.add_message(
-            request, messages.INFO, '非預期錯誤!')
-        return render(request, 'company_reset.html')
 
 
 def companyjobs_edit(request):

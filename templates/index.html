@@ -29,7 +29,11 @@
                 <li><a href="#">最新公告</a></li>
                 <li><a href="/main/companyjobs_edit/">企業專區</a></li>
                 <li><a href="/main/resume_style/">填寫履歷</a></li>
-                <li><a href="/main/login">登入</a></li>
+                {% if status %}
+                    <li><a href="/main/login">{{status}}</a></li>
+                {% else %}
+                    <li><a href="/main/login">登入</a></li>
+                {% endif %}
                 <li><a href="/main/logout">登出</a></li>
             </ul>
         </div>
