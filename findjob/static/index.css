@@ -31,8 +31,8 @@ body{
 .header .menu .submenu li a:hover{color:red;}
 
 .mainbox{
-    background-color: #7086f1;
-    height: 430px;
+    background-color: red;
+    height: 600px;
     margin-top: 20px;
 }
 

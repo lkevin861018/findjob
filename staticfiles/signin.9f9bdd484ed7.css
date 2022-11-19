@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding:0px;
+}
+
+.signinBox{
+    width:600px;
+    height:650px;
+    background-color: red;
+    position: relative;
+    top: 100px;
+    left:665px;
+    border-radius: 4px;
+}
+
+.signinBox01{
+    position: relative;
+    top: 10px;
+}
+.signinBox01 h1{
+    font-size: 30px;
+    font-weight:bolder;
+    text-align:center;
+}
+.signinBox02{
+    margin-top: 20px;
+}
+.signinBox02 input{
+    width: 380px;
+    height: 35px;
+    margin-top: 20px;
+    margin-left:110px;
+    font-weight:bolder;
+}
+.signinBox02 .button{
+    width: 383px;
+    font-weight:bolder;
+}
+.signinBox03{
+    display: flex;
+    margin-top: 20px;
+}
+
+.signinBox03 a{
+    text-decoration:none;
+    color:black;
+    font-size:40px;
+    margin-left: 110px;
+}
+
+.signinBox04{
+    margin-top: 20px;
+}
+
+.signinBox04 .Button{
+    background-color: lightcoral;
+    width:  380px;
+    height: 30px;
+    margin-left: 110px;
+    border-radius:4px;
+    margin-top: 20px;
+}
+.signinBox04 .Button a{
+    position: relative;
+    top:5px;
+    left:75px;
+    list-style-type:none;
+    text-decoration:none;
+    font-size:20px;
+    color:black;  
+}

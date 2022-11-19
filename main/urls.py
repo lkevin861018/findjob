@@ -15,12 +15,11 @@ Including another URLconf
 """
 
 from django.urls import path, include, re_path
-from main import views, view2, search, viewjobs
+from main import views, view2, search, viewjobs, search_tenlong, govexam
 from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.conf.urls.static import static
-
 
 urlpatterns = [
     re_path(r'^signIn/', views.signIn, name='signIn'),
@@ -46,6 +45,9 @@ urlpatterns = [
     re_path(r'^companyjobs_save/', views.companyjobs_save,
             name='companyjobs_save'),
     re_path(r'^partnerjobs/', views.partnerjobs, name='partnerjobs'),
+    re_path(r'^search_book/', search_tenlong.search_tenlong,
+            name='search_book'),
+    re_path(r'^govresource/', govexam.govresource, name='govresource'),
 
 ]
 
