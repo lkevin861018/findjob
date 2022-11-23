@@ -533,12 +533,20 @@ def info_reset(request):
 
                 elif 'company' in request.session['user']:
                     info_reset_complete = [companyname, email, re_pass]
-                # send_mail("confirm mail", "進入此連結驗證:http://127.0.0.1:8000/main/info_resetconfirm?k=%s" % info_reset_complete_key2,
-                #           "kevinliang1018@gmail.com", [user.email])
-                send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/info_resetconfirm?k=%s" % info_reset_complete_key2,
-                          "kevinliang1018@gmail.com", [user.email])
-                time.sleep(3)
-                return HttpResponse("請置信箱驗證!")
+                if email == '':
+                    # send_mail("confirm mail", "進入此連結驗證:http://127.0.0.1:8000/main/info_resetconfirm?k=%s" % info_reset_complete_key2,
+                    #           "kevinliang1018@gmail.com", [user.email])
+                    send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/info_resetconfirm?k=%s" % info_reset_complete_key2,
+                              "kevinliang1018@gmail.com", [user.email])
+                    time.sleep(3)
+                    return HttpResponse("請置信箱驗證!")
+                else:
+                    # send_mail("confirm mail", "進入此連結驗證:http://127.0.0.1:8000/main/info_resetconfirm?k=%s" % info_reset_complete_key2,
+                    #           "kevinliang1018@gmail.com", [email])
+                    send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/info_resetconfirm?k=%s" % info_reset_complete_key2,
+                              "kevinliang1018@gmail.com", [email])
+                    time.sleep(3)
+                    return HttpResponse("請置新信箱驗證!")
         except:
             messages.add_message(
                 request, messages.INFO, '非預期錯誤!')
