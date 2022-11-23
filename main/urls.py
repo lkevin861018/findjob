@@ -48,6 +48,9 @@ urlpatterns = [
     re_path(r'^search_book/', search_tenlong.search_tenlong,
             name='search_book'),
     re_path(r'^govresource/', govexam.govresource, name='govresource'),
+    re_path(r'^info_reset/', views.info_reset, name='info_reset'),
+    re_path(r'^info_resetconfirm/', views.info_resetconfirm,
+            name='info_resetconfirm'),
 
 ]
 

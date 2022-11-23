@@ -139,24 +139,6 @@ def login(request):
         if 'status' in request.session:
             status = request.session['status']
             return render(request, 'index.html', context={'status': status})
-        if 'account' in request.session:
-            account = request.session['account']
-            passwd = request.session['passwd']
-            try:
-                try:
-                    user = Dreamreal.objects.get(pid=account)
-                except:
-                    user = Dreamreal.objects.get(email=account)
-            except:
-                try:
-                    user = companyacc.objects.get(pid=account)
-                except:
-                    user = companyacc.objects.get(email=account)
-            if passwd == user.passwd:
-                return redirect('index')
-            else:
-                del request.session['account']
-                del request.session['passwd']
         else:
             pass
     except:
@@ -181,9 +163,13 @@ def login(request):
                 request.session['passwd'] = user.passwd
                 try:
                     request.session['status'] = str(user.companyname)
+                    request.session['account'] = account
+                    request.session['user'] = "company"
                 except:
                     request.session['status'] = str(
                         user.firstname)+str(user.lastname)
+                    request.session['account'] = account
+                    request.session['user'] = "user"
                 return redirect('index')
             else:
                 messages.add_message(
@@ -223,7 +209,7 @@ def reset(request):
         reset_complete_key2 = reset_complete_key
         account = request.POST['account']
         re_pass = request.POST['repass']
-        chech_pass = request.POST['checkpass']
+        check_pass = request.POST['checkpass']
         try:
             try:
                 user = Dreamreal.objects.get(email=account)
@@ -243,7 +229,7 @@ def reset(request):
                 messages.add_message(
                     request, messages.INFO, '密碼不可空白!')
                 return render(request, 'reset.html')
-            elif re_pass != chech_pass:
+            elif re_pass != check_pass:
                 messages.add_message(
                     request, messages.INFO, '密碼確認錯誤，請重新確認!')
                 return render(request, 'reset.html')
@@ -266,7 +252,8 @@ def reset(request):
 def index(request):
     try:
         status = request.session['status']
-        return render(request, 'index.html', context={'status': status})
+        user = request.session['user']
+        return render(request, 'index.html', context={'status': status, 'user': user})
     except:
         return render(request, 'index.html')
 
@@ -457,3 +444,104 @@ def partnerjobs(request):
         return render(request, "partnerjobs.html", {"jobs_info": jobs_info})
     else:
         return render(request, "partnerjobs.html", {"jobs_info": jobs_info})
+
+
+info_reset_complete = []
+info_reset_complete_key = ''.join(random.choice(string.ascii_letters + string.digits)
+                                  for _ in range(12))
+info_reset_complete_key2 = ''
+
+
+def info_resetconfirm(request):
+    global info_reset_complete
+    global info_reset_complete_key2
+    try:
+        if request.GET.get('k') == info_reset_complete_key2:
+            account = request.session['account']
+            if 'user' in request.session['user']:
+                try:
+                    user = Dreamreal.objects.get(pid=account)
+                except:
+                    user = Dreamreal.objects.get(email=account)
+                if info_reset_complete[0] != '':
+                    user.lastname = info_reset_complete[0]
+                if info_reset_complete[1] != '':
+                    user.firstname = info_reset_complete[1]
+                if info_reset_complete[2] != '':
+                    user.email = info_reset_complete[2]
+                if info_reset_complete[3] != '':
+                    user.passwd = info_reset_complete[3]
+
+            elif 'company' in request.session['user']:
+                try:
+                    user = companyacc.objects.get(pid=account)
+                except:
+                    user = companyacc.objects.get(email=account)
+                if info_reset_complete[0] != '':
+                    user.companyname = info_reset_complete[0]
+                if info_reset_complete[1] != '':
+                    user.email = info_reset_complete[1]
+                if info_reset_complete[2] != '':
+                    user.passwd = info_reset_complete[2]
+
+            user.save()
+            messages.add_message(
+                request, messages.INFO, '修改成功!')
+            return redirect('index')
+        else:
+            messages.add_message(
+                request, messages.INFO, '驗證錯誤，請重新修改!')
+            return render(request, 'info_reset.html')
+    except:
+        messages.add_message(
+            request, messages.INFO, '非預期錯誤!')
+        return render(request, 'info_reset.html')
+
+
+def info_reset(request):
+    if request.method == 'POST':
+        global info_reset_complete
+        global info_reset_complete_key
+        global info_reset_complete_key2
+        info_reset_complete_key2 = info_reset_complete_key
+        account = request.session['account']
+        if 'user' in request.session['user']:
+            try:
+                user = Dreamreal.objects.get(pid=account)
+            except:
+                user = Dreamreal.objects.get(email=account)
+            lastname = request.POST['lastname']
+            firstname = request.POST['firstname']
+        elif 'company' in request.session['user']:
+            try:
+                user = companyacc.objects.get(pid=account)
+            except:
+                user = companyacc.objects.get(email=account)
+            companyname = request.session['companyname']
+        email = request.POST['email']
+        re_pass = request.POST['repass']
+        check_pass = request.POST['checkpass']
+
+        try:
+            if re_pass != check_pass:
+                messages.add_message(
+                    request, messages.INFO, '密碼確認錯誤，請重新確認!')
+                return render(request, 'info_reset.html')
+            else:
+                if 'user' in request.session['user']:
+                    info_reset_complete = [lastname, firstname, email, re_pass]
+
+                elif 'company' in request.session['user']:
+                    info_reset_complete = [companyname, email, re_pass]
+                # send_mail("confirm mail", "進入此連結驗證:http://127.0.0.1:8000/main/info_resetconfirm?k=%s" % info_reset_complete_key2,
+                #           "kevinliang1018@gmail.com", [user.email])
+                send_mail("confirm mail", "進入此連結驗證:https://findjob2022project.herokuapp.com/main/info_resetconfirm?k=%s" % info_reset_complete_key2,
+                          "kevinliang1018@gmail.com", [user.email])
+                time.sleep(3)
+                return HttpResponse("請置信箱驗證!")
+        except:
+            messages.add_message(
+                request, messages.INFO, '非預期錯誤!')
+            return render(request, 'info_reset.html')
+    else:
+        return render(request, 'info_reset.html')

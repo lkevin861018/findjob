@@ -10,6 +10,22 @@
       <div class="header">
          <div class="examinations">
             <h1>Books</h1>
+            <div class="dropdown-content01">
+               快速搜尋：
+               <a href="/main/search_book?keyword=資料科學"><button>資料科學</button></a>
+               <a href="/main/search_book?keyword=人工智慧"><button>人工智慧</button></a>
+               <a href="/main/search_book?keyword=職涯發展"><button>職涯發展</button></a>
+               <a href="/main/search_book?keyword=前端開發"><button>前端開發</button></a>
+               <a href="/main/search_book?keyword=網頁設計"><button>網頁設計</button></a>
+               <a href="/main/search_book?keyword=網站開發"><button>網站開發</button></a>
+               <a href="/main/search_book?keyword=架站軟體"><button>架站軟體</button></a>
+               <a href="/main/search_book?keyword=UI/UX"><button>UI/UX</button></a>
+               <a href="/main/search_book?keyword=行動軟體開發"><button>行動軟體開發</button></a>
+               <a href="/main/search_book?keyword=資料庫"><button>資料庫</button></a>
+               <a href="/main/search_book?keyword=系統開發"><button>系統開發</button></a>
+               <a href="/main/search_book?keyword=雲端計算"><button>雲端計算</button></a>
+               <a href="/main/search_book?keyword=分散式架構"><button>分散式架構</button></a>
+           </div>
             <form action="{% url 'search_book' %}" method="POST">
                {% csrf_token %}
                <input type="text" name="keyword" value="{{keyword}}" size="20">
@@ -17,6 +33,7 @@
             </form>
             {% for Booklist in Booklist%}
                <div class="Books_info">
+                  
                   <div class="Books_title"> 
                      書名：{{Booklist.0}}
                   </div>

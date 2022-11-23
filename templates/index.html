@@ -25,16 +25,22 @@
         </div>
         <div class="menu">
             <ul class="submenu">
-                <li><a href="">首頁</a></li>
+                <li><a href="/main/index">首頁</a></li>
                 <li><a href="#">最新公告</a></li>
-                <li><a href="/main/companyjobs_edit/">企業專區</a></li>
-                <li><a href="/main/resume_style/">填寫履歷</a></li>
-                {% if status %}
-                    <li><a href="/main/login">{{status}}</a></li>
+                {% if user == "company" %}
+                    <li><a href="/main/index">{{status}}</a></li>
+                    <li><a href="/main/companyjobs_edit/">職缺刊登</a></li>
+                    <li><a href="/main/info_reset/">資料修改</a></li>
+                    <li><a href="/main/logout">登出</a></li>
+                {% elif user == "user"%}
+                    <li><a href="/main/index">{{status}}</a></li>
+                    <li><a href="/main/resume_edit/">填寫履歷</a></li>
+                    <li><a href="/main/info_reset/">資料修改</a></li>
+                    <li><a href="/main/logout">登出</a></li>
                 {% else %}
                     <li><a href="/main/login">登入</a></li>
+                    <li><a href="/main/signIn">註冊</a></li>
                 {% endif %}
-                <li><a href="/main/logout">登出</a></li>
             </ul>
         </div>
    </div>
@@ -51,22 +57,7 @@
                     </div>
                 </div>
                 <div class="itme-dropdown01">
-                    <li><a href="/main/search_book">書籍搜尋</a></li>
-                    <div class="dropdown-content01">
-                        <li><a href="#">資料科學</a></li>
-                        <li><a href="#">人工智慧</a></li>
-                        <li><a href="#">職涯發展</a></li>
-                        <li><a href="#">前端開發</a></li>
-                        <li><a href="#">網頁設計</a></li>
-                        <li><a href="#">網站開發</a></li>
-                        <li><a href="#">架站軟體</a></li>
-                        <li><a href="#">UI/UX</a></li>
-                        <li><a href="#">行動軟體開發</a></li>
-                        <li><a href="#">資料庫</a></li>
-                        <li><a href="#">系統開發</a></li>
-                        <li><a href="#">雲端計算</a></li>
-                        <li><a href="#">分散式架構</a></li>
-                    </div>
+                    <a href="/main/search_book">書籍搜尋</a>
                 </div>
                 <div class="itme-dropdown01">
                     <li><a href="/main/search_hahow">課程選單</a></li>

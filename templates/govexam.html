@@ -10,20 +10,32 @@
       <div class="header">
          <div class="examinations">
             <h1>Examinations</h1>
+            <div class="dropdown-content01">
+               <form action="/main/govresource/" method="POST">
+                  {% csrf_token %}
+                  <label for='DK'><input type='radio' id='DK' name='category' value='DK' checked>專業知識領域類</label>
+                  <label for='OS'><input type='radio' id='OS' name='category' value='OS' >作業系統類</label>
+                  <label for='DA'><input type='radio' id='DA' name='category' value='DA' >資料庫應用類</label>
+                  <label for='OA'><input type='radio' id='OA' name='category' value='OA' >辦公軟體應用類</label>
+                  <input type='submit' value='搜尋'>
+               </form>
+            </div>
             {% for examlist in examlist%}
                <div class="exam_category"> 
-                  {{examlist.0}}
+                  <h3>{{examlist.0}}<h3>
                </div>
                <div class="exam_title"> 
                   官方連結：<a href="{{examlist.2}}">{{examlist.1}}</a>
                </div>
                <div class="recommend_classes"> 
-                  <form action="{% url 'search_book' %}" method="POST">
-                     {% csrf_token %}
-                     您可能需要：{{examlist.3}}
-                     <input type="hidden" name="keyword" value="{{examlist.3}}">
-                     <input type="submit" value="搜尋">
-                  </form>
+                  您可能需要：
+                  <div class="Books_img"> 
+                     {%if examlist.3 == '雲端練功坊輔考專用線上練習系統'%}
+                        <a href="https://cloud.csf.org.tw/"><img width="140" alt="{{examlist.3}}" src="{{examlist.4}}"></a>
+                     {% else %}
+                        <a href="/main/search_book?keyword={{examlist.3}}"><img width="140" alt="{{examlist.3}}" src="{{examlist.4}}"></a>
+                     {%endif%}
+                  </div>
                </div>
             <br>
             {% endfor%}

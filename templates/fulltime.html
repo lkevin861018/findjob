@@ -6,7 +6,7 @@
       <title>Document</title>
    </head>
    <body>
-      
+
       <div class="header">
          <div class="menu">
             <h1>Full Time</h1>
@@ -43,26 +43,32 @@
             <input type="submit" value="search">
          </form>
          <div class="fullimejob">
-            {% for FTjob in FTjob%} 
-            <div class="WorkArea"> 
+            {% for FTjob in FTjob%}
+            <div class="WorkArea">
                {{FTjob.0}}
-            </div>  
-            <div class="company"> 
+            </div>
+            <div class="company">
                {{FTjob.2}}
             </div>
-            <div class="time"> 
+            <div class="time">
                {{FTjob.1}}
             </div>
-            <div class="title"> 
-               <div class="href"> 
+            <div class="title">
+               <div class="href">
                   <a href="{{FTjob.5}}">{{FTjob.3}}</a>
                </div>
             </div>
-            <div class="saraly"> 
+            <div class="saraly">
                {{FTjob.4}}
             </div>
-            <input type="button" value="應徵"><br>
-            <br>
+            <input type="button" value="應徵">
+            <a href = '/main/search_book'>
+               <input type="button" value="相關書籍">
+               </a>
+               {% comment %} <a href = '/main/govresource'>
+               <input type="button" value="相關認證">
+               </a> {% endcomment %}
+               <br><br>
             {% endfor%}
          </div>
    </body>
