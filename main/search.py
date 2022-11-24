@@ -176,7 +176,12 @@ def shoppingr(request):
 
 def shopping(request):
     if request.method == 'POST':
-        account = request.session['account']
+        try:
+            account = request.session['account']
+        except:
+            messages.add_message(
+                request, messages.INFO, '請先登入!')
+            return redirect('login')
         try:
             try:
                 try:
@@ -249,11 +254,13 @@ def shoplist(request):
         itemnamelist = []
         quantylist = []
         for i in range(len(shophist)):
+            buyer = shophist[i].name
             itemnameh = shophist[i].itemname
             quantyh = shophist[i].quanty
             itemnamelist.append(itemnameh)
             quantylist.append(quantyh)
-        data = {'itemname': itemnamelist,
+        data = {'buyer': buyer,
+                'itemname': itemnamelist,
                 'qunaty': quantylist
                 }
         frame = DataFrame(data)
@@ -262,6 +269,7 @@ def shoplist(request):
         messages.add_message(
             request, messages.INFO, '查無購買紀錄!')
         return redirect('index')
+
     framehtml = frame.to_html()
     framehtml += r'<br><a href="/main/index"><button>返回首頁</button> </a>'
     return HttpResponse(framehtml)

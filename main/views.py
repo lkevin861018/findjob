@@ -210,7 +210,7 @@ def login(request):
     try:
         if 'status' in request.session:
             status = request.session['status']
-            return render(request, 'index.html', context={'status': status})
+            return render(request, 'index.html', context={'status': status, 'user': user})
         else:
             pass
     except:
