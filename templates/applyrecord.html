@@ -1,0 +1,21 @@
+<html>
+<body>
+    <h1>應徵紀錄</h1>
+    <a href="/main/index">
+        <button>返回首頁</button>
+    </a>
+    <div class="applyrecord">
+        <table bord=1>
+        {% for applyrecord in applyrecord%}
+        <tr><td>{{applyrecord.0}}</td>
+            <td>{{applyrecord.1}}</td>
+            <td>{{applyrecord.2}}</td>
+            <td>{{applyrecord.3}}</td>
+            <td>{{applyrecord.4}}</td>
+            <td>{{applyrecord.5}}</td>
+        </tr>
+        {% endfor%}
+        </table>
+     </div>
+</body>
+</html>

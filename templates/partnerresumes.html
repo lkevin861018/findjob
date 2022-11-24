@@ -1,0 +1,61 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="header">
+            <div class="menu">
+                <h1>Partnerjobs</h1>
+            </div>
+        </div>
+        <div class="partnerjobs">
+            {% for resumelist in resumelist%}
+            <div class="time">
+                {{resumelist.0}}
+            </div>
+            <div class="time"> 
+               {{resumelist.1}}
+            </div>
+            <div class="title"> 
+                {{resumelist.2}}
+            </div>
+            <div class="title"> 
+                {{resumelist.3}}
+            </div>
+            <div class="content"> 
+                {{resumelist.4}}
+            </div>
+            <div class="require"> 
+                {{resumelist.5}}
+            </div>
+            <div class="saraly"> 
+               {{resumelist.6}}
+            </div>
+            <form action="{% url 'apply' %}" method="POST"> 
+                {% csrf_token %}
+                <input type="hidden" name="user_lastname" value="{{resumelist.0}}">
+                <input type="hidden" name="user_firstname" value="{{resumelist.1}}">
+                <input type="hidden" name="user_skill" value="{{resumelist.2}}">
+                <input type="hidden" name="user_selfintroduction" value="{{resumelist.3}}">
+                <input type="hidden" name="user_education" value="{{resumelist.4}}">
+                <input type="hidden" name="user_experience" value="{{resumelist.5}}">
+                <input type="hidden" name="user_email" value="{{resumelist.6}}">
+                <input type="radio" name = "number" value="1" checked >職缺一
+                <input type="radio" name = "number" value="2" >職缺二
+                <input type="radio" name = "number" value="3" >職缺三
+                <input type="radio" name = "number" value="4" >職缺四
+                <input type="radio" name = "number" value="5" >職缺五
+                <input type="submit" value="邀請面試">
+             </form>
+            <br>
+            {% endfor%}
+        </div>
+        <a href="/main/index">
+            <button>返回首頁</button>
+        </a>
+    </body>
+</html>

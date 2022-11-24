@@ -63,3 +63,23 @@ class shop(models.Model):
 
     class Meta:
         db_table = 'shop'
+
+# 應徵/邀請面試紀錄 database
+class applytable(models.Model):
+    company_name = models.CharField(max_length=50)
+    company_title = models.CharField(max_length=2000)
+    company_uploaddate = models.CharField(max_length=200)
+    company_salary = models.CharField(max_length=50)
+    company_email = models.CharField(max_length=50)
+    company_address = models.CharField(max_length=200)
+
+    user_lastname = models.CharField(max_length=50)
+    user_firstname = models.CharField(max_length=50)
+    user_skill = models.CharField(max_length=200)
+    user_selfintroduction = models.CharField(max_length=2000)
+    user_education = models.CharField(max_length=200)
+    user_experience = models.CharField(max_length=2000)
+    user_email = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'applytable'

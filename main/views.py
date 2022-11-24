@@ -2,13 +2,14 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from main.models import Dreamreal, companyacc, companyacc_jobs, user_resume
+from main.models import Dreamreal, companyacc, companyacc_jobs, user_resume, applytable
 from django.core.mail import send_mail
 import re
 import string
 import random
 import datetime
 import time
+
 
 def resume_style(request):
     if request.method == 'POST':
@@ -624,3 +625,126 @@ def info_reset(request):
             return render(request, 'info_reset.html')
     else:
         return render(request, 'info_reset.html')
+
+# 應徵/邀請面試紀錄
+
+
+def applyrecord(request):
+    user = request.session['user']
+    account = request.session['account']
+    if request.method == "POST" or "GET":
+        applyrecord = ["", "", "", "", "", ""]
+        if user == "company":
+            try:
+                userobject = companyacc.objects.get(pid=account)
+            except:
+                userobject = companyacc.objects.get(email=account)
+                applytdata = applytable.objects.get(
+                    company_name=userobject.companyname)
+            applytdata = applytable.objects.raw(
+                'SELECT id,company_title,user_lastname,user_firstname,user_skill,user_education,user_experience,user_email FROM applytable WHERE company_name = "' + userobject.companyname+'"')
+            for row in applytdata:
+                company_title = row.company_title
+                user_name = row.user_lastname + row.user_firstname
+                user_skill = row.user_skill
+                user_education = row.user_education
+                user_experience = row.user_experience
+                user_email = row.user_email
+                applyrecord.append(
+                    [company_title, user_name, user_skill, user_education, user_experience, user_email])
+        elif user == "user":
+            try:
+                userobject = Dreamreal.objects.get(pid=account)
+            except:
+                userobject = Dreamreal.objects.get(email=account)
+            applytdata = applytable.objects.raw(
+                'SELECT id,company_name,company_title,company_uploaddate,company_salary,company_address,company_email FROM applytable WHERE user_email = "' + userobject.email+'"')
+            for row in applytdata:
+                company_name = row.company_name
+                company_title = row.company_title
+                company_uploaddate = row.company_uploaddate
+                company_salary = row.company_salary
+                company_address = row.company_address
+                company_email = row.company_email
+                applyrecord.append([company_name, company_title, company_uploaddate,
+                                   company_salary, company_address, company_email])
+        return render(request, "applyrecord.html", {"applyrecord": applyrecord})
+
+# 應徵/邀請面試
+
+
+def apply(request):
+    try:
+        user = request.session['user']
+        account = request.session['account']
+    except:
+        return redirect('index')
+    applyrecord = applytable()
+    if request.method == "POST" or "GET":
+        if user == "company":
+            try:
+                userobject = companyacc.objects.get(pid=account)
+            except:
+                userobject = companyacc.objects.get(email=account)
+            try:
+                number = userobject.pid + "_" + request.POST['number']
+                job = companyacc_jobs.objects.get(number=number)
+            except:
+                return redirect("companyjobs_edit")
+            applyrecord.company_name = job.companyname
+            applyrecord.company_title = job.title
+            applyrecord.company_uploaddate = job.uploaddate
+            applyrecord.company_salary = job.salary
+            applyrecord.company_address = job.address
+            applyrecord.company_email = job.email
+            applyrecord.user_lastname = request.POST["user_lastname"]
+            applyrecord.user_firstname = request.POST["user_firstname"]
+            applyrecord.user_skill = request.POST["user_skill"]
+            applyrecord.user_selfintroduction = request.POST["user_selfintroduction"]
+            applyrecord.user_education = request.POST["user_education"]
+            applyrecord.user_experience = request.POST["user_experience"]
+            applyrecord.user_email = request.POST["user_email"]
+            applyrecord.save()
+
+        elif user == "user":
+            try:
+                userobject = Dreamreal.objects.get(pid=account)
+            except:
+                userobject = Dreamreal.objects.get(email=account)
+            try:
+                resume = user_resume.objects.get(pid=userobject.pid)
+            except:
+                return redirect('resume_edit')
+            applyrecord.company_name = request.POST["company_name"]
+            applyrecord.company_title = request.POST["company_title"]
+            applyrecord.company_uploaddate = request.POST["company_uploaddate"]
+            applyrecord.company_salary = request.POST["company_salary"]
+            applyrecord.company_address = request.POST["company_address"]
+            applyrecord.company_email = request.POST["company_email"]
+            applyrecord.user_lastname = userobject.lastname
+            applyrecord.user_firstname = userobject.firstname
+            applyrecord.user_skill = resume.user_skill
+            applyrecord.user_selfintroduction = resume.user_selfintroduction
+            applyrecord.user_education = resume.user_education
+            applyrecord.user_experience = resume.user_experience
+            applyrecord.user_email = userobject.email
+            applyrecord.save()
+        return redirect('applyrecord')
+
+# 履歷清單(企業用)
+
+
+def partnerresumes(request):
+    userlist = Dreamreal.objects.all()
+    resumelist = []
+    for user in userlist:
+        try:
+            resume = user_resume.objects.get(pid=user.pid)
+            resumelist.append([resume.lastname, resume.firstname, resume.user_skill,
+                              resume.user_selfintroduction, resume.user_education, resume.user_experience, user.email])
+        except:
+            next
+    if request.method == 'POST':
+        return render(request, "partnerresumes.html", {"resumelist": resumelist})
+    else:
+        return render(request, "partnerresumes.html", {"resumelist": resumelist})

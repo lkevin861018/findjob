@@ -44,6 +44,8 @@
       <div class="partimejob">
          <h2>{{area}}</h2>
          {% for PTjob in PTjob%}
+         <form action="{% url 'apply' %}" method="POST">
+            {% csrf_token %}
          <div class="area">
             {{PTjob.5}}
          </div>
@@ -61,7 +63,14 @@
          <div class="saraly">
             {{PTjob.4}}</a>
          </div>
-         <input type="button" value="應徵">
+         <input type="hidden" name="company_name" value="{{FTjob.2}}">
+         <input type="hidden" name="company_title" value="{{FTjob.3}}">
+         <input type="hidden" name="company_uploaddate" value="{{FTjob.1}}">
+         <input type="hidden" name="company_salary" value="{{FTjob.4}}">
+         <input type="hidden" name="company_address" value="{{FTjob.0}}">
+         <input type="hidden" name="company_email" value="">
+         <input type="submit" value="應徵">
+      </form>
          <a href = '/main/search_book'>
             <input type="button" value="相關書籍">
             </a>

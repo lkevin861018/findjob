@@ -54,6 +54,10 @@ urlpatterns = [
     re_path(r'^shopping/', search.shopping, name='shopping'),
     re_path(r'^shoplist/', search.shoplist, name='shoplist'),
 
+    re_path(r'^applyrecord/', views.applyrecord, name='applyrecord'),
+    re_path(r'^apply/', views.apply, name='apply'),
+    re_path(r'^partnerresumes/', views.partnerresumes, name='partnerresumes'),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

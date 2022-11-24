@@ -14,37 +14,38 @@
         </div>
         <div class="partnerjobs">
             {% for jobs_info in jobs_info%}
-            <div class="WorkArea"> 
+            <div class="WorkArea">
                {{jobs_info.9}}
-            </div>  
-            <div class="company"> 
+            </div>
+            <div class="company">
                {{jobs_info.1}}
             </div>
-            <div class="time"> 
+            <div class="time">
                {{jobs_info.3}}
             </div>
-            <div class="title"> 
+            <div class="title">
                 {{jobs_info.2}}
             </div>
-            <div class="content"> 
+            <div class="content">
                 {{jobs_info.4}}
             </div>
-            <div class="require"> 
+            <div class="require">
                 {{jobs_info.5}}
             </div>
-            <div class="saraly"> 
+            <div class="saraly">
                {{jobs_info.6}}
             </div>
-            <div class="benefits"> 
+            <div class="benefits">
                 {{jobs_info.7}}
             </div>
-            <div class="email"> 
+            <div class="email">
                 {{jobs_info.8}}
             </div>
-            <input type="button" value="應徵"><br>
+            <input type="submit" value="應徵">
             <br>
             {% endfor%}
         </div>
+
         <a href="/main/index">
             <button>返回首頁</button>
         </a>
