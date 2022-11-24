@@ -49,6 +49,7 @@
    <div class="mainbox">
         <div class="mainbox01">
             <div class="menu">
+                {% if user == "user" %}
                 <div class="itme-dropdown01">
                     <li><a href="/main/joblist">職缺搜尋</a></li>
                     <div class="dropdown-content01">
@@ -58,6 +59,7 @@
                         <li><a href="/main/search104">104人力銀行推薦</a></li>
                     </div>
                 </div>
+                {% endif %}
                 <div class="itme-dropdown01">
                     <a href="/main/search_book">書籍搜尋</a>
                 </div>
@@ -70,6 +72,11 @@
                 <div class="itme-dropdown01">
                     <li><a href="/main/shoplist">訂購資料</a></li>
                 </div>
+                {% if user == "company" %}
+                <div class="itme-dropdown01">
+                    <li><a href="/main/apply">人才搜尋</a></li>
+                </div>
+                {% endif %}
             </div>
         </div>
         <div class="mainbox02">
