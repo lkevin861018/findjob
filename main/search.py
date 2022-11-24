@@ -71,6 +71,8 @@ def search_tenlong(request):
 
     if request.method == 'POST':
         keyword = request.POST['keyword']
+        if keyword == "":
+            keyword = "熱門"
         url = 'https://www.tenlong.com.tw/search?keyword=%s' % keyword
         Booklist = search(url)
         return render(request, "search_book.html", {"Booklist": Booklist, "keyword": keyword})
