@@ -6,6 +6,13 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
    </head>
+   {% if messages %}
+        {% for message in messages %}
+            <script>
+                alert('{{ message}}');
+            </script>
+            {% endfor %}
+   {% endif %}
    <body>
       <div class="header">
          <div class="examinations">
@@ -31,26 +38,26 @@
                <input type="text" name="keyword" value="{{keyword}}" size="20">
                <input type="submit" value="搜尋">
             </form>
+            <a href="/main/index"><button>返回首頁</button></a>
             {% for Booklist in Booklist%}
                <div class="Books_info">
-                  
-                  <div class="Books_title"> 
+
+                  <div class="Books_title">
                      書名：{{Booklist.0}}
                   </div>
-                  <div class="Books_price"> 
+                  <div class="Books_price">
                      價格：{{Booklist.1}}
                   </div>
-                  <div class="Books_data"> 
+                  <div class="Books_data">
                      {{Booklist.2}}
                   </div>
-                  <div class="Books_img"> 
+                  <div class="Books_img">
                      <img width="140" alt="{{Booklist.0}}" src="{{Booklist.3}}">
                   </div>
                </div>
-               <input type="submit" value="加入購物"><br>
+               <a href="/main/shoppingr?type=b&item={{Booklist.0}}"><button>加入購物</button></a>
             <br>
             {% endfor%}
-            <a href="/main/index"><button>返回首頁</button></a>
          </div>
       </div>
    </body>

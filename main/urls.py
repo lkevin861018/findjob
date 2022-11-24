@@ -15,8 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path, include, re_path
-from main import views, view2, search, viewjobs, search_tenlong, govexam
-from django.views.generic import TemplateView
+from main import views, search, viewjobs
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.conf.urls.static import static
@@ -29,10 +28,10 @@ urlpatterns = [
     re_path(r'^resetconfirm/', views.resetconfirm, name='resetconfirm'),
     re_path(r'^index/', views.index, name='index'),
     re_path(r'^reset/', views.reset, name='reset'),
-    re_path(r'^resume_style/', view2.resume_style, name='resume_style'),
-    re_path(r'^resume_edit/', view2.resume_edit, name='resume_edit'),
-    re_path(r'^resume_save/', view2.resume_save, name='resume_save'),
-    re_path(r'^search104/', search.search104, name='search104'),
+    re_path(r'^resume_style/', views.resume_style, name='resume_style'),
+    re_path(r'^resume_edit/', views.resume_edit, name='resume_edit'),
+    re_path(r'^resume_save/', views.resume_save, name='resume_save'),
+    re_path(r'^search104/', viewjobs.search104, name='search104'),
     re_path(r'^search_hahow/', search.search_hahow, name='search_hahow'),
     re_path(r'^parttime/', viewjobs.parttime, name='parttime'),
     re_path(r'^fulltime/', viewjobs.fulltime, name='fulltime'),
@@ -45,12 +44,15 @@ urlpatterns = [
     re_path(r'^companyjobs_save/', views.companyjobs_save,
             name='companyjobs_save'),
     re_path(r'^partnerjobs/', views.partnerjobs, name='partnerjobs'),
-    re_path(r'^search_book/', search_tenlong.search_tenlong,
+    re_path(r'^search_book/', search.search_tenlong,
             name='search_book'),
-    re_path(r'^govresource/', govexam.govresource, name='govresource'),
+    re_path(r'^govresource/', search.govresource, name='govresource'),
     re_path(r'^info_reset/', views.info_reset, name='info_reset'),
     re_path(r'^info_resetconfirm/', views.info_resetconfirm,
             name='info_resetconfirm'),
+    re_path(r'^shoppingr/', search.shoppingr, name='shoppingr'),
+    re_path(r'^shopping/', search.shopping, name='shopping'),
+    re_path(r'^shoplist/', search.shoplist, name='shoplist'),
 
 ]
 

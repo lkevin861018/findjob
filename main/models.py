@@ -37,7 +37,8 @@ class companyacc(models.Model):
 
     class Meta:
         db_table = 'campanyacc'
-        
+
+
 class companyacc_jobs(models.Model):
     number = models.CharField(max_length=50)
     companyname = models.CharField(max_length=50)
@@ -49,6 +50,16 @@ class companyacc_jobs(models.Model):
     benefits = models.CharField(max_length=2000)
     email = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
-    
+
     class Meta:
         db_table = 'companyacc_jobs'
+
+
+class shop(models.Model):
+    name = models.CharField(max_length=50)
+    itemname = models.CharField(max_length=50)
+    quanty = models.CharField(max_length=50)
+    pid = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'shop'
