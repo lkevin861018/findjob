@@ -210,18 +210,20 @@ def shopping(request):
 
         try:
             q = int(request.POST['quanty'])
+            p = request.POST['pricec']
         except:
             messages.add_message(
                 request, messages.INFO, '數量錯誤，請填阿拉伯數字!')
             global urltype, item
-            return redirect('https://findjob2022project.herokuapp.com/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, price))
-            # return redirect('http://127.0.0.1:8000/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, price))
+            return redirect('https://findjob2022project.herokuapp.com/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, pricel))
+            # return redirect('http://127.0.0.1:8000/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, pricel))
+        pc = 'NT$'+str(int(p.replace('NT$', ''))*q)
         Shop = shop(
             name=name,
             itemname=item,
             quanty=q,
             pid=pid,
-            price='NT$'+str(int(pricel.replace('NT$', ''))*q)
+            price=pc
         )
 
         Shop.save()
