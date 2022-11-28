@@ -157,16 +157,16 @@ def search_hahow(request):
 
 item = ''
 urltype = ''
-pricel = ''
+price = ''
 
 
 def shoppingr(request):
-    global urltype, item, pricel
+    global urltype, item, price
     try:
         try:
             item = request.GET['item']
             urltype = request.GET['type']
-            pricel = request.GET['price']
+            price = request.GET['price']
         except:
             urltype = request.GET['type']
             if 'c' == urltype:
@@ -177,7 +177,7 @@ def shoppingr(request):
         messages.add_message(
             request, messages.INFO, '非預期錯誤!')
         return redirect('index')
-    return render(request, 'shopping.html', context={'item': item, 'price': pricel})
+    return render(request, 'shopping.html', context={'item': item, 'price': price})
 
 
 def shopping(request):
@@ -210,20 +210,19 @@ def shopping(request):
 
         try:
             q = int(request.POST['quanty'])
-            p = request.POST['pricec']
         except:
             messages.add_message(
                 request, messages.INFO, '數量錯誤，請填阿拉伯數字!')
             global urltype, item
-            return redirect('https://findjob2022project.herokuapp.com/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, pricel))
-            # return redirect('http://127.0.0.1:8000/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, pricel))
-        pc = 'NT$'+str(int(p.replace('NT$', ''))*q)
+            return redirect('https://findjob2022project.herokuapp.com/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, price))
+            # return redirect('http://127.0.0.1:8000/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, price))
+
         Shop = shop(
             name=name,
             itemname=item,
             quanty=q,
             pid=pid,
-            price=pc
+            price='NT$'+str(int(price.replace('NT$', ''))*q)
         )
 
         Shop.save()
@@ -261,6 +260,7 @@ def shoplist(request):
         shophist = shop.objects.filter(pid=upid)
         itemnamelist = []
         quantylist = []
+        pricelist = []
         for i in range(len(shophist)):
             buyer = shophist[i].name
             itemnameh = shophist[i].itemname
@@ -268,10 +268,11 @@ def shoplist(request):
             priceh = shophist[i].price
             itemnamelist.append(itemnameh)
             quantylist.append(quantyh)
+            pricelist.append(priceh)
         data = {'buyer': buyer,
                 'itemname': itemnamelist,
                 'qunaty': quantylist,
-                'price': priceh
+                'price': pricelist
                 }
         frame = DataFrame(data)
         frame.index += 1
