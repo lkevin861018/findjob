@@ -90,34 +90,38 @@ def search_tenlong(request):
 
 def search_hahow(request):
     if request.method == 'POST':
-        titleListdata = []
-        nameListdata = []
-        priceListdata = []
-        imgListdata = []
-        page = request.POST['page']
-        keyword = request.POST['keyword']
-        if '' in [keyword]:
-            keyword = '熱門'
+        while True:
+            titleListdata = []
+            nameListdata = []
+            priceListdata = []
+            imgListdata = []
+            page = request.POST['page']
+            keyword = request.POST['keyword']
+            if '' in [keyword]:
+                keyword = '熱門'
 
-        url = 'https://hahow.in/search/courses?query=%s&page=%s' % (
-            keyword, page)
+            url = 'https://hahow.in/search/courses?query=%s&page=%s' % (
+                keyword, page)
 
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-    # heroku上使用
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--no-sandbox")
-        browser = webdriver.Chrome(executable_path=os.environ.get(
-            "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        # browser = webdriver.Chrome(options=chrome_options)
-        browser.implicitly_wait(10)
-        browser.get(url)
-        browser.set_window_size(900, 900)
-        urlsource = browser.page_source
-        # browser.set_page_load_timeout(5)
-        soup = BeautifulSoup(urlsource, 'html.parser')
-        time.sleep(3)
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+        # heroku上使用
+            chrome_options.binary_location = os.environ.get(
+                "GOOGLE_CHROME_BIN")
+            chrome_options.add_argument("--disable-dev-shm-usage")
+            chrome_options.add_argument("--no-sandbox")
+            browser = webdriver.Chrome(executable_path=os.environ.get(
+                "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+            # browser = webdriver.Chrome(options=chrome_options)
+            browser.implicitly_wait(10)
+            browser.get(url)
+            browser.set_window_size(900, 900)
+            urlsource = browser.page_source
+            # browser.set_page_load_timeout(5)
+            soup = BeautifulSoup(urlsource, 'html.parser')
+            time.sleep(3)
+            if soup != '':
+                break
 
         titleList = soup.select('div.sc-18817me-0 h4')
         nameList = soup.select('div.sc-18817me-0 p')
@@ -222,7 +226,7 @@ def shopping(request):
             itemname=item,
             quanty=q,
             pid=pid,
-            price='NT$'+str(int(price.replace('NT$', ''))*q)
+            price='NT$'+str(int(price.replace('NT$', '').replace(',', ''))*q)
         )
 
         Shop.save()

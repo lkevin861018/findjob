@@ -3,42 +3,46 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from bs4 import BeautifulSoup
-from django.shortcuts import  render
+from django.shortcuts import render
 from selenium.webdriver.chrome.options import Options
 import os
 
 
 def search104(request):
     if request.method == 'POST':
-        #-----準備空串列資料以利在使用Django時可套用此參數-----------------------------##
-        tempTitleListData = []
-        tempCompanyListData = []
-        tempAreaListData = []
-        tempExperienceListData = []
-        tempEducationListData = []
-        tempSalaryListData = []
-        tempHrefListData = []
-        #---------------------------------------------------------------------------##
+        while True:
+            #-----準備空串列資料以利在使用Django時可套用此參數-----------------------------##
+            tempTitleListData = []
+            tempCompanyListData = []
+            tempAreaListData = []
+            tempExperienceListData = []
+            tempEducationListData = []
+            tempSalaryListData = []
+            tempHrefListData = []
+            #---------------------------------------------------------------------------##
 
-        keyword = request.POST['keyword']
-        keyword.encode('utf-8').decode('latin1')
-        num = request.POST['num']
-        area = request.POST['area']
-        url = "https://www.104.com.tw/jobs/search/?keyword=" + \
-            keyword+"&indexpoc&ro=0&page="+num+'&area='+area
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-    # heroku上使用
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--no-sandbox")
-        browser = webdriver.Chrome(executable_path=os.environ.get(
-            "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        # browser = webdriver.Chrome(options=chrome_options)
-        browser.implicitly_wait(5)
-        browser.get(url)
-        urlsource = browser.page_source
-        soup = BeautifulSoup(urlsource, 'html.parser')
+            keyword = request.POST['keyword']
+            keyword.encode('utf-8').decode('latin1')
+            num = request.POST['num']
+            area = request.POST['area']
+            url = "https://www.104.com.tw/jobs/search/?keyword=" + \
+                keyword+"&indexpoc&ro=0&page="+num+'&area='+area
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+        # heroku上使用
+            chrome_options.binary_location = os.environ.get(
+                "GOOGLE_CHROME_BIN")
+            chrome_options.add_argument("--disable-dev-shm-usage")
+            chrome_options.add_argument("--no-sandbox")
+            browser = webdriver.Chrome(executable_path=os.environ.get(
+                "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+            # browser = webdriver.Chrome(options=chrome_options)
+            browser.implicitly_wait(5)
+            browser.get(url)
+            urlsource = browser.page_source
+            soup = BeautifulSoup(urlsource, 'html.parser')
+            if soup != '':
+                break
         #---------------------------------------------------------------------------##
 
         #-----職缺名稱---------------------------------------------------------------##
