@@ -15,7 +15,7 @@ body{
     display: flex;
     justify-content: space-between;
     margin-top:10px;
-    padding:20px;
+    padding:10px;
     background-color: #404040;
 }
 .header .menu .submenu{display: flex;}
@@ -31,73 +31,110 @@ body{
 }
 .header .menu .submenu li a:hover{color:red;}
 
-.mainbox{
-    background-color: red;
-    height: 600px;
+.resume_style{
+    width:50%;
+    height:650px;
+    background-color:#404040;
+    display:flex;
+    margin-top:20px;
+    margin-left:475px;
+}
+.user0101{
+    list-style-type:none;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.user0101 .username{
+    font-size:20px;
+    font-weight:bolder;
+    color:white;
+    
+}
+
+.user02{
+    width: 200px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.user0201 li{
+    list-style-type:none;
+    font-size:20px;
+    font-weight:bolder;
+    color:white;
     margin-top: 20px;
 }
-
-.mainbox .mainbox01{
-    background-color:#404040;
-    width: 15%;
-    height:inherit;
-}
-
-.mainbox .mainbox01 .menu{
+.user0202 li{
     list-style-type:none;
-    padding: 20px;
-    
+    font-size:20px;
+    font-weight:bolder;
+    color:white;
+    margin-top: 20px;
 }
-    
-.mainbox .mainbox01 .menu a{
-    display:block;
-    text-decoration:none;
+.user_education{
+    display:flex;
+    margin-left: 20px;
+}
+.user_experience{
+    display:flex;
+    margin-top:15px;
+    margin-left: 20px;
+}
+.user_skill{
+    display:flex;
+    margin-top:55px;
+    margin-left: 20px;
+}
+.user_selfintroduction{
+    display:flex;
+    margin-top:95px;
+    margin-left: 20px;
+}
+textarea{
+    width: 500px;
+}
+.Title{
+    width:100px;
+    height:50px;
+    margin-top: 20px;
+    position: relative;
+    font-size:20px;
     color:white;
     font-weight:bolder;
 }
 
-.itme-dropdown01 {
+.textArea{
+    width: 200px;
+    height: 50px;
+    margin-top: 20px;
+}
+.Box03{
+    display:flex;
+    width:inherit;
+    width:53%;
+    height: 35px;
     position: relative;
-    display:block;
     margin-top: 20px;
+    top:85%;
+    left:-200px;
 }
-.dropdown-content01 {
-    top:0px;
-    left:80px;
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    transition: all .3s linear;
-}
-.dropdown-content01 li{
-    margin-top: 10px;
-    white-space: nowrap;
-}
-
-/* -------------------------------------------------------------- */
-/* .mainbox .mainbox01 .menu .submenu li{
+.Box03 a{
     list-style-type:none;
-    margin-left: -100px;
-    font-weight:bolder;
-    font-size:24px;
-}
-
-.mainbox .mainbox01 .menu .submenu li a{
-    display:block;
-    margin-left:60px;
-    color:black;
     text-decoration:none;
-    text-align: center;
-    margin-top: 20px;
-    transition: all .3s linear;
+    width: 300px;
+    font-size:20px;
+    font-weight:bolder;
+    color:white;
+    margin-left:30px;
+    position: relative;
+    top: 5px;
+}
+.Box03 input{
+    width:200px;
+    height: 35px;
+    font-size:20px;
+    font-weight:bolder;
 }
 
-
-.mainbox .mainbox01 .menu .submenu li a:hover{color:red;} */
-/* ----------------------------------------------------------- */
 .footer{
     background-color: #404040;
     display: flex;
@@ -194,4 +231,3 @@ body{
 .footer .footerbox01 .submainbox01 ul.menubox01 li a:hover{color:red;}
 .footer .footerbox01 .submainbox02 ul.menubox02 li a:hover{color:red;}
 .footer .footerbox02 .submainbox02 ul.menubox02 li a:hover{font-size:34px;}
-

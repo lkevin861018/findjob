@@ -1,0 +1,120 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color:#808080;
+}
+.header .logo a {
+    text-decoration:none;
+    color:white;
+    transition: all .3s linear;
+}
+.header .logo a:hover{color:red;}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin-top:10px;
+    padding:20px;
+    background-color: #404040;
+}
+.header .menu .submenu{display: flex;}
+.header .menu .submenu li{
+    list-style-type:none;
+    padding:8px;
+}
+.header .menu .submenu li a{
+    color: white;
+    text-decoration:none;
+    font-weight:bolder;
+    transition: all .3s linear;
+}
+.header .menu .submenu li a:hover{color:red;}
+
+.mainbox{
+    display:flex;
+    background-color: red;
+    height: 600px;
+    margin-top: 20px;
+}
+
+.mainbox .mainbox01{
+    background-color:#404040;
+    width: 15%;
+    height:inherit;
+}
+.mainbox01 .menu .itme-dropdown01 li {
+    list-style-type:none;
+    height: 50px;
+}
+
+.mainbox01 .menu .itme-dropdown01 li a {
+    display:block;
+    text-decoration:none;
+    color:white;
+    font-size:20px;
+    font-weight:bolder;
+    position: relative;
+    top: 10px;
+    text-align: center;
+}
+
+.mainbox0201{
+    background-color:#404040;
+    width: 1650px;
+    height: 50px;
+}
+.mainbox0201 label{
+    font-size:20px;
+    font-weight:bolder;
+    position: relative;
+    top: 10px;
+    left: 30px;
+    color:white;
+}
+.mainbox0201 .button{
+    width: 80px;
+    height:30px;
+    position: relative;
+    top:13px;
+    left:40px;
+    font-size:20px;
+    font-weight:bolder;
+}
+.mainbox0202{
+    display:flex;
+}
+
+.mainbox0202 .exam01{
+    width:250px;
+    height: 200px;
+    background-color:blue;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.mainbox0202 .exam_category{
+    width: 150px;
+    height:30px;
+    background-color:black;
+    margin-left: 50px;
+    text-align:center;
+    color:white;
+}
+
+.mainbox0202 .exam_title{
+    width:250px;
+    height:inherit;
+    list-style-type:none;
+    text-align:center;
+}
+.mainbox0202 .exam_title a{
+    text-decoration:none;
+    color:white;
+    font-size:20px;
+    font-weight:bolder;
+    position: relative;
+    top:70px;
+}
+

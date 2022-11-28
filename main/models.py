@@ -60,11 +60,14 @@ class shop(models.Model):
     itemname = models.CharField(max_length=50)
     quanty = models.CharField(max_length=50)
     pid = models.CharField(max_length=50)
+    price = models.CharField(max_length=50)
 
     class Meta:
         db_table = 'shop'
 
 # 應徵/邀請面試紀錄 database
+
+
 class applytable(models.Model):
     company_name = models.CharField(max_length=50)
     company_title = models.CharField(max_length=2000)

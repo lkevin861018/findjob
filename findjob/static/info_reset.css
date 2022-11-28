@@ -31,73 +31,47 @@ body{
 }
 .header .menu .submenu li a:hover{color:red;}
 
-.mainbox{
-    background-color: red;
-    height: 600px;
-    margin-top: 20px;
-}
-
-.mainbox .mainbox01{
+.mainbox02{
     background-color:#404040;
-    width: 15%;
-    height:inherit;
-}
-
-.mainbox .mainbox01 .menu{
-    list-style-type:none;
-    padding: 20px;
-    
-}
-    
-.mainbox .mainbox01 .menu a{
-    display:block;
-    text-decoration:none;
-    color:white;
-    font-weight:bolder;
-}
-
-.itme-dropdown01 {
+    margin-left:500px;
     position: relative;
-    display:block;
-    margin-top: 20px;
+    width:50%;   
+    height:630px;
 }
-.dropdown-content01 {
-    top:0px;
-    left:80px;
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    transition: all .3s linear;
+.mainbox0201{
+    position: relative;
+    text-align:center;
+    top: 20px;
 }
-.dropdown-content01 li{
-    margin-top: 10px;
-    white-space: nowrap;
-}
-
-/* -------------------------------------------------------------- */
-/* .mainbox .mainbox01 .menu .submenu li{
-    list-style-type:none;
-    margin-left: -100px;
+.mainbox0201 .title{
+    font-size:40px;
     font-weight:bolder;
-    font-size:24px;
+    color:white;
 }
-
-.mainbox .mainbox01 .menu .submenu li a{
-    display:block;
-    margin-left:60px;
-    color:black;
-    text-decoration:none;
-    text-align: center;
+.mainbox0202{
+    margin-top:40px;
+    text-align:center;
+    top: 20px;
+}
+.mainbox0202 input{
+    width: 600px;
+    height: 35px;
     margin-top: 20px;
-    transition: all .3s linear;
+    font-size:20px;
 }
 
+.mainbox0203{
+    margin-top:40px;
+    text-align:center;
+    top: 20px;
+}
+.mainbox0203 .button{
+    width: 605px;
+    height: 35px;
+    margin-top: 20px;
+    font-size:20px;
+}
 
-.mainbox .mainbox01 .menu .submenu li a:hover{color:red;} */
-/* ----------------------------------------------------------- */
 .footer{
     background-color: #404040;
     display: flex;
@@ -194,4 +168,3 @@ body{
 .footer .footerbox01 .submainbox01 ul.menubox01 li a:hover{color:red;}
 .footer .footerbox01 .submainbox02 ul.menubox02 li a:hover{color:red;}
 .footer .footerbox02 .submainbox02 ul.menubox02 li a:hover{font-size:34px;}
-

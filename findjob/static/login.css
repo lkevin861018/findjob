@@ -1,122 +1,117 @@
 *{
-    margin: 0;
-    padding:0;
+   padding: 0;
+   margin: 0;
 }
 
 .login{
-    width:inherit;
-    height:934px;
+    width: inherit;
+    height:933px;
+    background-color:#6b6b6b;
 }
 
 .loginBox{
-    width:max-content;
-    position: absolute;
-    top: 100px;
-    left:665px;
-    background-color: green;
     width: 600px;
     height: 650px;
+    background-color:#404040;
+    position: relative;
+    top: 150px;
+    left: 670px;
     border-radius: 4px;
 }
 
-.loginbox01{
-    margin-top: 30px;
+.loginBox01{
+    position: relative;
+    top: 25px;
     text-align: center;
-    color:black;
 }
-.loginbox02{
-    margin-top: 30px;
-    /* background-color: yellow; */
+.loginBox01 .loginTitle{
+    color:white;
+    font-size:26px;
+    font-weight:bolder;
 }
-.loginbox02 input{
-    margin-top: 20px;
-    margin-left: 100px;
-    width:380px;
+.loginBox02{
+    position: relative;
+    top: 30px;
+}
+input{
+    width: 400px;
+    height: 35px;
+    position:relative;
+    margin-top: 25px;
+    margin-left:93px;
+}
+ .button{
+    width: 405px;
+}
+.loginBox03{
+    display:flex;
+    position: relative;
+    top:40px;
+}
+.loginBox03 .Box03button{
+    width: 155px;
     height:35px;
-    font-size: 20px;
-    font-weight:bolder;
-}
-
-.loginbox03 input{
-    margin-top: 20px;
-    margin-left: 100px;
-    width: 380px;
-    height: 35px;
-    font-size: 20px;
-    font-weight:bolder;
-}
-.loginbox03 .signinbox{
-    width: 380px;
-    height: 35px;
-    background-color: orange;
-    margin-left: 100px;
+    background-color: red;
+    margin-left: 95px;
     margin-top: 20px;
     border-radius: 4px;
 }
-
-.loginbox03 .signinbox a{
+.loginBox03 a{
     position: relative;
     list-style-type:none;
     text-decoration:none;
     text-align: center;
+    color:white;
+    font-size:20px;
     top:5px;
-    font-size: 20px;
     font-weight:bolder;
-}
-.loginbox04{
-    /* background-color: aqua; */
-    display: flex;
-    height:50px;
-}
-.loginbox04 a{
-    list-style-type:none;
-    text-decoration:none;
-    margin-left: 135px;
-    margin-top: 13px;
-    font-size: 20px;
-    font-weight:bolder;
-}
-.loginbox05{
-    /* background-color: blueviolet; */
-    display: flex;
-    height:50px;
-}
-.loginbox05 h6{
-    font-size:20px;
-    font-weight:bolder;
-    margin-left:100px;
-    margin-top: 12px;
-}
-.loginbox05 a{
-    font-size:20px;
-    font-weight:bolder;
-    margin-left:126px;
-    margin-top: 12px;
-    list-style-type:none;
-    text-decoration:none;
 }
 
-.loginbox06 input{
-    display: block;
-    width: 380px;
-    height:50px;
-    margin-left:100px;
+.loginBox04{
+    display:flex;
+    position: relative;
+    top:40px;
 }
 
-.loginbox06 .Button{
-    background-color: lightcoral;
-    width:  380px;
-    height: 30px;
-    margin-left: 100px;
-    border-radius:4px;
+.loginBox04 .Box04button{
+    width: 155px;
+    height:35px;
+    background-color: red;
+    margin-left: 95px;
     margin-top: 20px;
+    border-radius: 4px;
 }
-.loginbox06 .Button a{
+
+.loginBox04 a{
+    list-style-type:none;
+    text-decoration:none;
+    color:white;
+    font-size:20px;
+    font-weight:bolder;
+    text-align: center;
     position: relative;
     top:5px;
-    left:75px;
+}
+.loginBox05{
+    position: relative;
+    top:60px;    
+}
+.loginBox05 .Box05button{
+    width:405px;
+    height:35px;
+    background-color: red;
+    margin-left: 95px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.loginBox05 a{
     list-style-type:none;
     text-decoration:none;
+    color:white;
     font-size:20px;
-    color:black;  
+    font-weight:bolder;
+    position: relative;
+    top:5px;
+    left:50px;
 }

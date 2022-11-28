@@ -258,16 +258,27 @@ def login(request):
 
 def logout(request):
     try:
-        try:
-            del request.session['account']
-            del request.session['passwd']
-            del request.session['status']
-        except:
-            try:
-                del request.session['passwd']
-                del request.session['status']
-            except:
-                del request.session['status']
+        del request.session['account']
+    except:
+        pass
+
+    try:
+        del request.session['status']
+    except:
+        pass
+
+    try:
+        del request.session['passwd']
+    except:
+        pass
+
+    try:
+        del request.session['user']
+    except:
+        pass
+
+    try:
+        del request.session['companyname']
     except:
         pass
     return redirect("index")

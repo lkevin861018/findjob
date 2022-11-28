@@ -57,13 +57,15 @@ def search_tenlong(request):
         for Title, Price, Data, Img in zip(Titlelist, Pricelist, Datalist, Imglist):
             bookdata = []
             bookdata.append(Title.text.replace("\n", "").split("(")[0])
-            bookdata.append(Price.text.replace(" ", "").replace("\n", ""))
+            bookdata.append('NT'+Price.text.replace(" ", "").replace("\n", ""))
             bookdata.append(Data.text)
             bookdata.append(Img.attrs["src"])
             Booklist.append(bookdata)
         return Booklist
     if 'keyword' in request.COOKIES:
         keyword = request.COOKIES['keyword']
+        if keyword == '':
+            keyword = "熱門"
         url = 'https://www.tenlong.com.tw/search?keyword=%s' % keyword
         Booklist = search(url)
         del request.COOKIES['keyword']
@@ -155,14 +157,16 @@ def search_hahow(request):
 
 item = ''
 urltype = ''
+price = ''
 
 
 def shoppingr(request):
-    global urltype, item
+    global urltype, item, price
     try:
         try:
             item = request.GET['item']
             urltype = request.GET['type']
+            price = request.GET['price']
         except:
             urltype = request.GET['type']
             if 'c' == urltype:
@@ -173,7 +177,7 @@ def shoppingr(request):
         messages.add_message(
             request, messages.INFO, '非預期錯誤!')
         return redirect('index')
-    return render(request, 'shopping.html', context={'item': item})
+    return render(request, 'shopping.html', context={'item': item, 'price': price})
 
 
 def shopping(request):
@@ -210,14 +214,14 @@ def shopping(request):
             messages.add_message(
                 request, messages.INFO, '數量錯誤，請填阿拉伯數字!')
             global urltype, item
-            return redirect('https://findjob2022project.herokuapp.com/main/shoppingr?type=%s&itme=%s' % (urltype, item))
-            # return redirect('http://127.0.0.1:8000/main/shoppingr?type=%s&itme=%s' % (urltype, item))
-
+            return redirect('https://findjob2022project.herokuapp.com/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, price))
+            # return redirect('http://127.0.0.1:8000/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, price))
         Shop = shop(
             name=name,
             itemname=item,
             quanty=q,
-            pid=pid
+            pid=pid,
+            price='NT$'+str(int(price.replace('NT$', ''))*q)
         )
 
         Shop.save()
@@ -259,11 +263,13 @@ def shoplist(request):
             buyer = shophist[i].name
             itemnameh = shophist[i].itemname
             quantyh = shophist[i].quanty
+            priceh = shophist[i].price
             itemnamelist.append(itemnameh)
             quantylist.append(quantyh)
         data = {'buyer': buyer,
                 'itemname': itemnamelist,
-                'qunaty': quantylist
+                'qunaty': quantylist,
+                'price': priceh
                 }
         frame = DataFrame(data)
         frame.index += 1

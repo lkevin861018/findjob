@@ -18,13 +18,14 @@
 	<form action="{% url 'shopping' %}" method="POST">
 	{% csrf_token %}
    <span>商品名稱:{{item}}</span><br>
+   <span>商品價格:{{price}}</span><br>
 	<span>請輸入數量：</span><input type="text" name="quanty" id=""><br>
 	<h5>
 	<input type="radio" name = "pay" value="" checked >貨到付款
          <input type="radio" name = "pay" value="" >信用卡轉帳
          <input type="radio" name = "pay" value="" >超商費款</h5>
 	<input type="submit" value="確認購買">
-	<form>
+   </form>
 <a href="/main/index">
         <button>返回首頁</button>
     </a>

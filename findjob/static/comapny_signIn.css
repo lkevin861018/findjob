@@ -2,12 +2,13 @@
     padding: 0;
     margin: 0;
 }
-.reset{
+
+.companysignIn{
     width: inherit;
     height:933px;
     background-color:#6b6b6b;
 }
-.resetBox{
+.companysignInBox{
     width: 600px;
     height:650px;
     background-color:#404040;
@@ -17,21 +18,21 @@
     border-radius: 4px;
 }
 
-.resetBox01{
+.companysignInBox01{
     position: relative;
     top: 25px;
     text-align: center;
 }
-.resetBox01 .resetTitle{
+.companysignInBox01 .companysignInTitle{
     color:white;
     font-size:26px;
     font-weight:bolder;
 }
-
-.resetBox02{
+.companysignInBox02{
     position: relative;
     top: 30px;
 }
+
 input{
     width: 400px;
     height: 35px;
@@ -39,17 +40,17 @@ input{
     margin-top: 25px;
     margin-left:93px;
 }
-.resetbutton{
+.companysignInbutton{
     width: 405px;
 }
 
-.resetBox03{
+.companysignInBox03{
     display:flex;
     position: relative;
     top:40px;
 }
-.resetBox03 .Box03button{
-    width:405px;
+.companysignInBox03 .Box03button{
+    width:155px;
     height:35px;
     background-color: red;
     margin-left: 95px;
@@ -57,7 +58,7 @@ input{
     border-radius: 4px;
 }
 
-.resetBox03 a{
+.companysignInBox03 a{
     position: relative;
     list-style-type:none;
     text-decoration:none;
@@ -66,4 +67,29 @@ input{
     font-size:20px;
     top:5px;
     font-weight:bolder;
+}
+
+.companysignInBox04{
+    position: relative;
+    top:40px;
+}
+
+.companysignInBox04 .Box04button{
+    width:405px;
+    height:35px;
+    background-color: red;
+    margin-left: 95px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.companysignInBox04 a{
+    list-style-type:none;
+    text-decoration:none;
+    color:white;
+    font-size:20px;
+    font-weight:bolder;
+    position: relative;
+    top:5px;
+    left: 50px;
 }
