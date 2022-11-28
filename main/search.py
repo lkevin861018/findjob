@@ -157,16 +157,16 @@ def search_hahow(request):
 
 item = ''
 urltype = ''
-price = ''
+pricel = ''
 
 
 def shoppingr(request):
-    global urltype, item, price
+    global urltype, item, pricel
     try:
         try:
             item = request.GET['item']
             urltype = request.GET['type']
-            price = request.GET['price']
+            pricel = request.GET['price']
         except:
             urltype = request.GET['type']
             if 'c' == urltype:
@@ -177,7 +177,7 @@ def shoppingr(request):
         messages.add_message(
             request, messages.INFO, '非預期錯誤!')
         return redirect('index')
-    return render(request, 'shopping.html', context={'item': item, 'price': price})
+    return render(request, 'shopping.html', context={'item': item, 'price': pricel})
 
 
 def shopping(request):
@@ -221,7 +221,7 @@ def shopping(request):
             itemname=item,
             quanty=q,
             pid=pid,
-            price='NT$'+str(int(price.replace('NT$', ''))*q)
+            price='NT$'+str(int(pricel.replace('NT$', ''))*q)
         )
 
         Shop.save()
