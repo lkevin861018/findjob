@@ -1,3 +1,87 @@
 .resume_style {
-    font-size: 20px;
+    position: relative;
+    margin-left: 15%;
+    margin-right: 15%;
+    height: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(4, 71, 21);
+    background-color: rgb(160, 255, 131);
 }
+
+.resume_style p{
+    font-size: 25px;
+}
+
+.resume_style .user_name {
+    position: relative;
+    top: 0%;
+    left: 0%;
+    width: 20%;
+    padding: 5px;
+}
+
+.resume_style .user_selfintroduction {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    width: 70%;
+    height: 40%;
+    padding: 5px;
+}
+
+.resume_style .user_selfintroduction textarea{
+    width: 100%;
+    height: 50%;
+    background-color: rgb(160, 255, 131);
+    border-style: none;
+    border-top-style: dotted;
+}
+
+.resume_style .user_education {
+    position: relative;
+    top: 18%;
+    left: 0%;
+    width: 45%;
+    padding: 5px;
+}
+
+.resume_style .user_education textarea{
+    width: 100%;
+    padding: 5px;
+    background-color: rgb(160, 255, 131);
+    border-style: none;
+    border-top-style: dotted;
+}
+
+.resume_style .user_skill {
+    position: absolute;
+    top: 30%;
+    left: 47%;
+    width: 50%;
+    padding: 5px;
+}
+
+.resume_style .user_skill textarea{
+    width: 100%;
+    padding: 5px;
+    background-color: rgb(160, 255, 131);
+    border-style: none;
+    border-top-style: dotted;
+}
+
+.resume_style .user_experience {
+    position: relative;
+    top: 22%;
+    left: 0%;
+    height: 50%;
+    padding: 5px;
+}
+
+.resume_style .user_experience textarea{
+    width: 100%;
+    height: 50%;
+    background-color: rgb(160, 255, 131);
+    border-style: none;
+    border-top-style: dotted;
+}
+

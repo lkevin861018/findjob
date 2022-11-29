@@ -1,3 +1,97 @@
 .resume_style {
-    font-size: 50px;
+    position: relative;
+    margin-left: 15%;
+    margin-right: 15%;
+    height: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(83, 83, 83);
+    background-color: rgb(221, 221, 221);
+}
+
+.resume_style p{
+    font-size: 25px;
+}
+
+.resume_style .user_name {
+    position: relative;
+    top: 0%;
+    left: 0%;
+    width: 40%;
+    padding: 0.5%;
+    background-color: rgb(221, 221, 221);
+}
+
+.resume_style .user_education {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    width: 49%;
+    padding: 0.5%;
+    border-style: none;
+    background-color: rgb(221, 221, 221);
+}
+
+.resume_style .user_education textarea{
+    width: 100%;
+    height: 22.5%;
+    padding: 0.5%;
+    border-style: none;
+    border-top-style: dotted;
+    background-color: rgb(221, 221, 221);
+}
+
+.resume_style .user_skill {
+    position: absolute;
+    top: 20%;
+    right: 0.5%;
+    width: 49%;
+    padding: 0.5%;
+    background-color: rgb(221, 221, 221);
+
+}
+
+.resume_style .user_skill textarea{
+    width: 100%;
+    padding: 5px;
+    border-style: none;
+    border-top-style: dotted;
+    background-color: rgb(221, 221, 221);
+}
+
+.resume_style .user_experience {
+    position: relative;
+    top: 8%;
+    left: 0%;
+    width: 45%;
+    height: 35%;
+    padding: 0.5%;
+    background-color: rgb(221, 221, 221);
+}
+
+.resume_style .user_experience textarea{
+    width: 100%;
+    height: 100%;
+    border-style: none;
+    border-top-style: dotted;
+    background-color: rgb(221, 221, 221);
+}
+
+.resume_style .user_selfintroduction {
+    position: relative;
+    top: 30%;
+    left: 0%;
+    width: 99%;
+    height: 30%;
+    padding: 0.5%;
+    color: rgb(221, 221, 221);
+    background-color: rgb(12, 12, 12);
+}
+
+.resume_style .user_selfintroduction textarea{
+    width: 100%;
+    height: 50%;
+    border-style: none;
+    border-top-style: dotted;
+    color: rgb(221, 221, 221);
+    background-color: rgb(12, 12, 12);
 }
