@@ -669,7 +669,7 @@ def applyrecord(request):
             except:
                 userobject = Dreamreal.objects.get(email=account)
             applytdata = applytable.objects.raw(
-                'SELECT id,company_name,company_title,company_uploaddate,company_salary,company_address,company_email FROM applytable WHERE user_email = ' + userobject.email)
+                'SELECT id,company_name,company_title,company_uploaddate,company_salary,company_address,company_email FROM applytable WHERE user_email = "' + userobject.email+'"')
             for row in applytdata:
                 company_name = row.company_name
                 company_title = row.company_title
