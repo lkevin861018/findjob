@@ -220,7 +220,7 @@ def shopping(request):
             global urltype, item
             return redirect('https://findjob2022project.herokuapp.com/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, price))
             # return redirect('http://127.0.0.1:8000/main/shoppingr?type=%s&itme=%s&price=%s' % (urltype, item, price))
-
+        time.sleep(5)
         Shop = shop(
             name=name,
             itemname=item,
