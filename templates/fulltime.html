@@ -42,6 +42,9 @@
             <input type="text" name="page" size="4" placeholder="頁數" value="">
             <input type="submit" value="search">
          </form>
+         <a href="/main/index">
+            <button>返回首頁</button>
+        </a>
          <div class="fullimejob">
             {% for FTjob in FTjob%}
             <form action="{% url 'apply' %}" method="POST">
